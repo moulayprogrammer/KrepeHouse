@@ -1,4 +1,4 @@
-package com.moulay.krepehouse.Controllers.FoodControllers;
+package com.moulay.krepehouse.Controllers.BillControllers;
 
 import com.moulay.krepehouse.BddPackage.FoodOperation;
 import com.moulay.krepehouse.Models.Food;

@@ -25,4 +25,10 @@ module com.moulay.krepehouse {
 
     exports com.moulay.krepehouse.Controllers.FoodControllers;
     opens com.moulay.krepehouse.Controllers.FoodControllers to javafx.fxml;
+
+    exports com.moulay.krepehouse.Controllers.VendorControllers;
+    opens com.moulay.krepehouse.Controllers.VendorControllers to javafx.fxml;
+
+    exports com.moulay.krepehouse.Controllers.BillControllers;
+    opens com.moulay.krepehouse.Controllers.BillControllers to javafx.fxml;
 }

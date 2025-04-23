@@ -1,4 +1,4 @@
-package com.moulay.krepehouse.Controllers.FoodControllers;
+package com.moulay.krepehouse.Controllers.BillControllers;
 
 import com.moulay.krepehouse.BddPackage.FoodOperation;
 import com.moulay.krepehouse.Models.Food;
@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AddController implements Initializable {
+public class UpdateController implements Initializable {
 
     @FXML
     private TextField tfNameAr,tfNameFr,tfPrice;
@@ -32,9 +32,11 @@ public class AddController implements Initializable {
     @FXML
     Label lbAlert;
     @FXML
-    Button btnInsert;
+    Button btnUpdate;
 
     private final FoodOperation operation = new FoodOperation();
+
+    private Food selectedFood;
 
 
     @Override
@@ -49,31 +51,14 @@ public class AddController implements Initializable {
         });
     }
 
-    @FXML
-    private void OnSaveStay(){
-        String nameAr = tfNameAr.getText().trim();
-        String nameFr = tfNameFr.getText().trim();
-        String price = tfPrice.getText().trim();
-        String desc = taDesc.getText().trim();
-        Image image = ivPicture.getImage();
+    public void Init(Food selectedFood){
+        this.selectedFood = selectedFood;
 
-
-        if ( !nameAr.isEmpty() && !nameFr.isEmpty() && !price.isEmpty()){
-
-            Food food = new Food(nameAr,nameFr,Float.parseFloat(price),desc,image);
-
-            boolean ins = insert(food);
-            if (ins){
-                tfNameAr.clear();
-                tfNameFr.clear();
-                tfPrice.clear();
-                taDesc.clear();
-                OnDeletePicture();
-            }else labelAlert("حدث خطـــأ");
-
-        }else {
-            labelAlert("من فضلك املأ كل الحقول الأساسية");
-        }
+        tfNameAr.setText(selectedFood.getNameAr());
+        tfNameFr.setText(selectedFood.getNameFr());
+        tfPrice.setText(String.valueOf(selectedFood.getPrice()));
+        taDesc.setText(selectedFood.getDescription());
+        ivPicture.setImage(selectedFood.getPicture());
     }
 
     @FXML
@@ -92,9 +77,9 @@ public class AddController implements Initializable {
             Food food = new Food(nameAr,nameFr,Float.parseFloat(price),desc,image);
 
 
-            boolean ins = insert(food);
+            boolean ins = update(food);
             if (ins){
-                closeDialog(btnInsert);
+                closeDialog(btnUpdate);
             }else {
                 labelAlert("حدث خطـــأ");
             }
@@ -122,20 +107,20 @@ public class AddController implements Initializable {
         }
     }
 
-    private boolean insert(Food food) {
-        boolean insert = false;
+    private boolean update(Food food) {
+        boolean update = false;
         try {
-            insert = operation.insert(food);
-            return insert;
+            update = operation.update(food,selectedFood);
+            return update;
         }catch (Exception e){
             e.printStackTrace();
-            return insert;
+            return update;
         }
     }
 
     @FXML
     private void OnClose(){
-        closeDialog(btnInsert);
+        closeDialog(btnUpdate);
     }
 
     private void closeDialog(Button btn) {
@@ -149,7 +134,7 @@ public class AddController implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
-        File imageFile = fileChooser.showOpenDialog( btnInsert.getScene().getWindow());
+        File imageFile = fileChooser.showOpenDialog( btnUpdate.getScene().getWindow());
 
         if (imageFile != null) {
             Image image = new Image(imageFile.toURI().toString());
@@ -158,7 +143,7 @@ public class AddController implements Initializable {
     }
 
     @FXML
-    public void OnDeletePicture() {
+    public void OnDeletePicture(ActionEvent actionEvent) {
         ivPicture.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/moulay/krepehouse/Images/crepe.jpg"))));
     }
 }

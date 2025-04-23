@@ -1,4 +1,4 @@
-package com.moulay.krepehouse.Controllers.FoodControllers;
+package com.moulay.krepehouse.Controllers.BillControllers;
 
 import com.moulay.krepehouse.BddPackage.FoodOperation;
 import com.moulay.krepehouse.Models.Food;
@@ -53,14 +53,14 @@ public class MainController implements Initializable {
 
         vboxOption.setVisible(false);
 
-        clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
+        /*clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
         clNameAr.setCellValueFactory(new PropertyValueFactory<>("nameAr"));
         clNameFr.setCellValueFactory(new PropertyValueFactory<>("nameFr"));
         clPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
         clPicture.setCellValueFactory(new PropertyValueFactory<>("picture"));
 
         // Customize image cell
-        clPicture.setCellFactory(col -> new javafx.scene.control.TableCell<>() {
+        clPicture.setCellFactory(col -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
 
             {
@@ -86,7 +86,7 @@ public class MainController implements Initializable {
             else refresh();
         });
 
-        refresh();
+        refresh();*/
     }
 
     @FXML
@@ -112,7 +112,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void OnUpdate() {
-        try {
+        /*try {
             vboxOption.setVisible(false);
 
             Food selectedFood = table.getSelectionModel().getSelectedItem();
@@ -148,13 +148,13 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
     private void OnDelete(ActionEvent actionEvent) {
 
-        try {
+        /*try {
             vboxOption.setVisible(false);
 
             Food selectedFood = table.getSelectionModel().getSelectedItem();
@@ -189,7 +189,7 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
@@ -200,7 +200,7 @@ public class MainController implements Initializable {
 
     @FXML
     void ActionSearch() {
-        try {
+        /*try {
             // filtrer les données
             ObservableList<Food> dataFacture = table.getItems();
             FilteredList<Food> filteredData = new FilteredList<>(dataFacture, e -> true);
@@ -226,7 +226,7 @@ public class MainController implements Initializable {
 
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML

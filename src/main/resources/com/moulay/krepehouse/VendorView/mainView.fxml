@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.FoodControllers.MainController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.VendorControllers.MainController">
    <center>
       <AnchorPane styleClass="container" BorderPane.alignment="CENTER">
          <children>
@@ -17,11 +17,9 @@
                      <children>
                         <TableView fx:id="table" onMouseClicked="#tableClick" styleClass="table" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                           <columns>
-                            <TableColumn fx:id="clId" styleClass="column-table" text="#" />
-                              <TableColumn fx:id="clPicture" prefWidth="200.0" styleClass="column-table" text="الصورة" />
-                              <TableColumn fx:id="clNameAr" prefWidth="180.0" styleClass="column-table" text="الاسم بالعربية" />
-                              <TableColumn fx:id="clNameFr" editable="false" prefWidth="200.0" sortable="false" styleClass="column-table" text="الاسم بالفرنسية" />
-                              <TableColumn fx:id="clPrice" prefWidth="120.0" styleClass="column-table" text="السعر" />
+                            <TableColumn fx:id="clId" prefWidth="100.0" styleClass="column-table" text="#" />
+                              <TableColumn fx:id="clName" prefWidth="304.0" styleClass="column-table" text="الاسم" />
+                              <TableColumn fx:id="clPhone" prefWidth="283.0" styleClass="column-table" text="رقم الهاتف" />
                           </columns>
                         </TableView>
                      </children>
@@ -150,7 +148,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" minWidth="300.0" prefHeight="154.0" prefWidth="378.0" spacing="20.0">
                      <children>
-                        <Button graphicTextGap="6.0" maxHeight="35.0" maxWidth="150.0" minHeight="35.0" minWidth="150.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="35.0" prefWidth="150.0" styleClass="add-new-item" text="اضافة وجبة/مشروب" textFill="WHITE">
+                        <Button graphicTextGap="6.0" maxHeight="35.0" maxWidth="150.0" minHeight="35.0" minWidth="150.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="35.0" prefWidth="150.0" styleClass="add-new-item" text="اضافة بائع" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

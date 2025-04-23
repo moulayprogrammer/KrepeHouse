@@ -1,5 +1,6 @@
 package com.moulay.krepehouse.BddPackage;
 
+import com.moulay.krepehouse.Models.Food;
 import com.moulay.krepehouse.Models.Vendor;
 
 import java.sql.PreparedStatement;
@@ -218,4 +219,25 @@ public class VendorOperation extends BDD<Vendor>{
         closeDatabase();
         return list;
     }
+
+    public boolean isExistInBills(Vendor o) {
+        connectDatabase();
+        boolean ex = false;
+        String query = "SELECT * FROM `bill` WHERE `UniqueID_VENDOR` = ?";
+        try {
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setInt(1,o.getUniqueId());
+            ResultSet resultSet = preparedStmt.executeQuery();
+
+            if (resultSet.next()){
+                ex = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeDatabase();
+        return ex;
+    }
+
 }

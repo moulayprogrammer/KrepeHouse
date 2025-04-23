@@ -1,7 +1,9 @@
-package com.moulay.krepehouse.Controllers.FoodControllers;
+package com.moulay.krepehouse.Controllers.VendorControllers;
 
-import com.moulay.krepehouse.BddPackage.FoodOperation;
+
+import com.moulay.krepehouse.BddPackage.VendorOperation;
 import com.moulay.krepehouse.Models.Food;
+import com.moulay.krepehouse.Models.Vendor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,8 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -34,18 +34,14 @@ public class MainController implements Initializable {
     private TextField tfRecherche;
 
     @FXML
-    TableView<Food> table;
+    TableView<Vendor> table;
     @FXML
     TableColumn<Food,Integer> clId;
     @FXML
-    TableColumn<Food,String> clNameAr,clNameFr;
-    @FXML
-    TableColumn<Food,Double> clPrice;
-    @FXML
-    TableColumn<Food, Image> clPicture;
+    TableColumn<Food,String> clName,clPhone;
 
 
-    private final FoodOperation operation = new FoodOperation();
+    private final VendorOperation operation = new VendorOperation();
 
 
     @Override
@@ -54,32 +50,8 @@ public class MainController implements Initializable {
         vboxOption.setVisible(false);
 
         clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
-        clNameAr.setCellValueFactory(new PropertyValueFactory<>("nameAr"));
-        clNameFr.setCellValueFactory(new PropertyValueFactory<>("nameFr"));
-        clPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        clPicture.setCellValueFactory(new PropertyValueFactory<>("picture"));
-
-        // Customize image cell
-        clPicture.setCellFactory(col -> new javafx.scene.control.TableCell<>() {
-            private final ImageView imageView = new ImageView();
-
-            {
-                imageView.setFitWidth(100);
-                imageView.setFitHeight(50);
-                imageView.setPreserveRatio(true);
-            }
-
-            @Override
-            protected void updateItem(Image image, boolean empty) {
-                super.updateItem(image, empty);
-                if (empty || image == null) {
-                    setGraphic(null);
-                } else {
-                    imageView.setImage(image);
-                    setGraphic(imageView);
-                }
-            }
-        });
+        clName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        clPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
         tfRecherche.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.isEmpty()) ActionSearch();
@@ -92,7 +64,7 @@ public class MainController implements Initializable {
     @FXML
     private void OnAdd(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/FoodView/addView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/VendorView/addView.fxml"));
             DialogPane temp = loader.load();
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(temp);
@@ -115,15 +87,15 @@ public class MainController implements Initializable {
         try {
             vboxOption.setVisible(false);
 
-            Food selectedFood = table.getSelectionModel().getSelectedItem();
+            Vendor selectedVendor = table.getSelectionModel().getSelectedItem();
 
-            if (selectedFood != null) {
+            if (selectedVendor != null) {
                 try {
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/FoodView/updateView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/VendorView/updateView.fxml"));
                     DialogPane temp = loader.load();
                     UpdateController controller = loader.getController();
-                    controller.Init(selectedFood);
+                    controller.Init(selectedVendor);
                     Dialog<ButtonType> dialog = new Dialog<>();
                     dialog.setDialogPane(temp);
                     dialog.resizableProperty().setValue(false);
@@ -157,18 +129,18 @@ public class MainController implements Initializable {
         try {
             vboxOption.setVisible(false);
 
-            Food selectedFood = table.getSelectionModel().getSelectedItem();
+            Vendor selectedVendor = table.getSelectionModel().getSelectedItem();
 
-            if (selectedFood != null) {
+            if (selectedVendor != null) {
                 try {
 
-                    if (!operation.isExistInBills(selectedFood) && !operation.isExistInMenu(selectedFood)){
-                        operation.delete(selectedFood);
+                    if (!operation.isExistInBills(selectedVendor)){
+                        operation.delete(selectedVendor);
                         refresh();
                     }else {
                         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
                         alertWarning.setHeaderText("تحذير");
-                        alertWarning.setContentText("الوجبة تم استعمالها في طلب او قائمة طعام");
+                        alertWarning.setContentText("العامل قام بعدة طلبيات لا يمكن حذفه");
                         alertWarning.initOwner(this.vboxOption.getScene().getWindow());
                         Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
                         okButton.setText("موافق");
@@ -202,25 +174,21 @@ public class MainController implements Initializable {
     void ActionSearch() {
         try {
             // filtrer les données
-            ObservableList<Food> dataFacture = table.getItems();
-            FilteredList<Food> filteredData = new FilteredList<>(dataFacture, e -> true);
+            ObservableList<Vendor> tableItems = table.getItems();
+            FilteredList<Vendor> filteredData = new FilteredList<>(tableItems, e -> true);
             String txtRecherche = tfRecherche.getText().trim();
 
-            filteredData.setPredicate(food -> {
+            filteredData.setPredicate(vendor -> {
                 if (txtRecherche.isEmpty()) {
                     refresh();
                     return true;
-                } else if (food.getNameAr().contains(txtRecherche)) {
+                } else if (vendor.getName().contains(txtRecherche)) {
 
                     return true;
-                } else if (food.getNameFr().contains(txtRecherche)) {
-                    return true;
-                } else if (food.getDescription().contains(txtRecherche)) {
-                    return true;
-                } else return String.valueOf(food.getPrice()).contains(txtRecherche);
+                } else return vendor.getPhone().contains(txtRecherche);
             });
 
-            SortedList<Food> sortedList = new SortedList<>(filteredData);
+            SortedList<Vendor> sortedList = new SortedList<>(filteredData);
             sortedList.comparatorProperty().bind(table.comparatorProperty());
             table.setItems(sortedList);
 
@@ -241,12 +209,12 @@ public class MainController implements Initializable {
     }
 
     private void refresh(){
-        ArrayList<Food> foods = operation.getAll();
-        ObservableList<Food> foodObservableList = FXCollections.observableArrayList();
-        foodObservableList.addAll(foods);
-        table.setItems(foodObservableList );
+        ArrayList<Vendor> vendors = operation.getAll();
+        ObservableList<Vendor> vendorObservableList = FXCollections.observableArrayList();
+        vendorObservableList.addAll(vendors);
+        table.setItems(vendorObservableList );
 
-        lbNumber.setText(String.valueOf(foods.size()));
+        lbNumber.setText(String.valueOf(vendors.size()));
     }
 
 

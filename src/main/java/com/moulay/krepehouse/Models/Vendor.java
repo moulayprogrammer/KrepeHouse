@@ -27,6 +27,13 @@ public class Vendor {
         this.updateAt = updateAt;
     }
 
+    public Vendor(String name, String phone, String username, String password) {
+        this.name = name;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+    }
+
     public int getUniqueId() {
         return uniqueId;
     }

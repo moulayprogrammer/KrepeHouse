@@ -1,21 +1,16 @@
-package com.moulay.krepehouse.Controllers.VendorControllers;
+package com.moulay.krepehouse.Controllers.MenuControllers;
 
-
-import com.moulay.krepehouse.BddPackage.VendorOperation;
+import com.moulay.krepehouse.BddPackage.FoodOperation;
 import com.moulay.krepehouse.Models.Food;
-import com.moulay.krepehouse.Models.Vendor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -35,14 +30,18 @@ public class MainController implements Initializable {
     private TextField tfRecherche;
 
     @FXML
-    TableView<Vendor> table;
+    TableView<Food> table;
     @FXML
     TableColumn<Food,Integer> clId;
     @FXML
-    TableColumn<Food,String> clName,clPhone;
+    TableColumn<Food,String> clNameAr,clNameFr;
+    @FXML
+    TableColumn<Food,Double> clPrice;
+    @FXML
+    TableColumn<Food, Image> clPicture;
 
 
-    private final VendorOperation operation = new VendorOperation();
+    private final FoodOperation operation = new FoodOperation();
 
 
     @Override
@@ -50,38 +49,46 @@ public class MainController implements Initializable {
 
         vboxOption.setVisible(false);
 
-        table.setEditable(true);
-        clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
-        clName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        clPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        /*clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
+        clNameAr.setCellValueFactory(new PropertyValueFactory<>("nameAr"));
+        clNameFr.setCellValueFactory(new PropertyValueFactory<>("nameFr"));
+        clPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
+        clPicture.setCellValueFactory(new PropertyValueFactory<>("picture"));
 
-        // Make First Name column editable
-        clName.setCellFactory(TextFieldTableCell.forTableColumn());
-        clName.setOnEditCommit(event -> {
-            System.out.println(event.getNewValue());
-            /*Person person = event.getRowValue();
-            person.setFirstName(event.getNewValue()); // Update the model*/
+        // Customize image cell
+        clPicture.setCellFactory(col -> new TableCell<>() {
+            private final ImageView imageView = new ImageView();
+
+            {
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(50);
+                imageView.setPreserveRatio(true);
+            }
+
+            @Override
+            protected void updateItem(Image image, boolean empty) {
+                super.updateItem(image, empty);
+                if (empty || image == null) {
+                    setGraphic(null);
+                } else {
+                    imageView.setImage(image);
+                    setGraphic(imageView);
+                }
+            }
         });
-
-// Make Last Name column editable
-        /*lastNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        lastNameCol.setOnEditCommit(event -> {
-            Person person = event.getRowValue();
-            person.setLastName(event.getNewValue());
-        });*/
 
         tfRecherche.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.isEmpty()) ActionSearch();
             else refresh();
         });
 
-        refresh();
+        refresh();*/
     }
 
     @FXML
     private void OnAdd(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/VendorView/addView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/FoodView/addView.fxml"));
             DialogPane temp = loader.load();
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(temp);
@@ -101,18 +108,18 @@ public class MainController implements Initializable {
 
     @FXML
     private void OnUpdate() {
-        try {
+        /*try {
             vboxOption.setVisible(false);
 
-            Vendor selectedVendor = table.getSelectionModel().getSelectedItem();
+            Food selectedFood = table.getSelectionModel().getSelectedItem();
 
-            if (selectedVendor != null) {
+            if (selectedFood != null) {
                 try {
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/VendorView/updateView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/FoodView/updateView.fxml"));
                     DialogPane temp = loader.load();
                     UpdateController controller = loader.getController();
-                    controller.Init(selectedVendor);
+                    controller.Init(selectedFood);
                     Dialog<ButtonType> dialog = new Dialog<>();
                     dialog.setDialogPane(temp);
                     dialog.resizableProperty().setValue(false);
@@ -137,27 +144,27 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
     private void OnDelete(ActionEvent actionEvent) {
 
-        try {
+        /*try {
             vboxOption.setVisible(false);
 
-            Vendor selectedVendor = table.getSelectionModel().getSelectedItem();
+            Food selectedFood = table.getSelectionModel().getSelectedItem();
 
-            if (selectedVendor != null) {
+            if (selectedFood != null) {
                 try {
 
-                    if (!operation.isExistInBills(selectedVendor)){
-                        operation.delete(selectedVendor);
+                    if (!operation.isExistInBills(selectedFood) && !operation.isExistInMenu(selectedFood)){
+                        operation.delete(selectedFood);
                         refresh();
                     }else {
                         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
                         alertWarning.setHeaderText("تحذير");
-                        alertWarning.setContentText("العامل قام بعدة طلبيات لا يمكن حذفه");
+                        alertWarning.setContentText("الوجبة تم استعمالها في طلب او قائمة طعام");
                         alertWarning.initOwner(this.vboxOption.getScene().getWindow());
                         Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
                         okButton.setText("موافق");
@@ -178,7 +185,7 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
@@ -189,29 +196,33 @@ public class MainController implements Initializable {
 
     @FXML
     void ActionSearch() {
-        try {
+        /*try {
             // filtrer les données
-            ObservableList<Vendor> tableItems = table.getItems();
-            FilteredList<Vendor> filteredData = new FilteredList<>(tableItems, e -> true);
+            ObservableList<Food> dataFacture = table.getItems();
+            FilteredList<Food> filteredData = new FilteredList<>(dataFacture, e -> true);
             String txtRecherche = tfRecherche.getText().trim();
 
-            filteredData.setPredicate(vendor -> {
+            filteredData.setPredicate(food -> {
                 if (txtRecherche.isEmpty()) {
                     refresh();
                     return true;
-                } else if (vendor.getName().contains(txtRecherche)) {
+                } else if (food.getNameAr().contains(txtRecherche)) {
 
                     return true;
-                } else return vendor.getPhone().contains(txtRecherche);
+                } else if (food.getNameFr().contains(txtRecherche)) {
+                    return true;
+                } else if (food.getDescription().contains(txtRecherche)) {
+                    return true;
+                } else return String.valueOf(food.getPrice()).contains(txtRecherche);
             });
 
-            SortedList<Vendor> sortedList = new SortedList<>(filteredData);
+            SortedList<Food> sortedList = new SortedList<>(filteredData);
             sortedList.comparatorProperty().bind(table.comparatorProperty());
             table.setItems(sortedList);
 
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
@@ -226,12 +237,12 @@ public class MainController implements Initializable {
     }
 
     private void refresh(){
-        ArrayList<Vendor> vendors = operation.getAll();
-        ObservableList<Vendor> vendorObservableList = FXCollections.observableArrayList();
-        vendorObservableList.addAll(vendors);
-        table.setItems(vendorObservableList );
+        ArrayList<Food> foods = operation.getAll();
+        ObservableList<Food> foodObservableList = FXCollections.observableArrayList();
+        foodObservableList.addAll(foods);
+        table.setItems(foodObservableList );
 
-        lbNumber.setText(String.valueOf(vendors.size()));
+        lbNumber.setText(String.valueOf(foods.size()));
     }
 
 

@@ -88,7 +88,7 @@ public class MainController implements Initializable {
     @FXML
     private void OnAdd(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/FoodView/addView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/MenuView/addView.fxml"));
             DialogPane temp = loader.load();
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(temp);

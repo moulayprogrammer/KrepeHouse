@@ -148,7 +148,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" minWidth="300.0" prefHeight="154.0" prefWidth="378.0" spacing="20.0">
                      <children>
-                        <Button graphicTextGap="6.0" maxHeight="35.0" maxWidth="150.0" minHeight="35.0" minWidth="150.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="35.0" prefWidth="150.0" styleClass="add-new-item" text="اضافة بائع" textFill="WHITE">
+                        <Button graphicTextGap="6.0" maxHeight="35.0" maxWidth="150.0" minHeight="35.0" minWidth="150.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="35.0" prefWidth="150.0" styleClass="add-new-item" text="ضافة قائمة طعام" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

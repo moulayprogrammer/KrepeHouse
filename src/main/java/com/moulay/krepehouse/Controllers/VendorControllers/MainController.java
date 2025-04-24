@@ -23,7 +23,10 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainController implements Initializable {
 
@@ -62,13 +65,6 @@ public class MainController implements Initializable {
             /*Person person = event.getRowValue();
             person.setFirstName(event.getNewValue()); // Update the model*/
         });
-
-// Make Last Name column editable
-        /*lastNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        lastNameCol.setOnEditCommit(event -> {
-            Person person = event.getRowValue();
-            person.setLastName(event.getNewValue());
-        });*/
 
         tfRecherche.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.isEmpty()) ActionSearch();

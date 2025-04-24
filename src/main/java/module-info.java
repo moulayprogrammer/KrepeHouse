@@ -31,4 +31,7 @@ module com.moulay.krepehouse {
 
     exports com.moulay.krepehouse.Controllers.BillControllers;
     opens com.moulay.krepehouse.Controllers.BillControllers to javafx.fxml;
+
+    exports com.moulay.krepehouse.Controllers.MenuControllers;
+    opens com.moulay.krepehouse.Controllers.MenuControllers to javafx.fxml;
 }

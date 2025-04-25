@@ -31,8 +31,6 @@ import java.util.stream.Collectors;
 public class MainController implements Initializable {
 
     @FXML
-    private VBox vboxOption;
-    @FXML
     private Label lbNumber;
     @FXML
     private TextField tfRecherche;
@@ -51,7 +49,6 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        vboxOption.setVisible(false);
 
         table.setEditable(true);
         clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
@@ -82,7 +79,7 @@ public class MainController implements Initializable {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(temp);
             dialog.resizableProperty().setValue(false);
-            dialog.initOwner(this.vboxOption.getScene().getWindow());
+            dialog.initOwner(this.tfRecherche.getScene().getWindow());
             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
             Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
             closeButton.setVisible(false);
@@ -98,7 +95,6 @@ public class MainController implements Initializable {
     @FXML
     private void OnUpdate() {
         try {
-            vboxOption.setVisible(false);
 
             Vendor selectedVendor = table.getSelectionModel().getSelectedItem();
 
@@ -112,7 +108,7 @@ public class MainController implements Initializable {
                     Dialog<ButtonType> dialog = new Dialog<>();
                     dialog.setDialogPane(temp);
                     dialog.resizableProperty().setValue(false);
-                    dialog.initOwner(this.vboxOption.getScene().getWindow());
+                    dialog.initOwner(this.tfRecherche.getScene().getWindow());
                     dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
                     Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
                     closeButton.setVisible(false);
@@ -126,7 +122,7 @@ public class MainController implements Initializable {
                 Alert alertWarning = new Alert(Alert.AlertType.WARNING);
                 alertWarning.setHeaderText("تحذير");
                 alertWarning.setContentText("من فضلك قم بتحديد ما تريد تعديله");
-                alertWarning.initOwner(this.vboxOption.getScene().getWindow());
+                alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
                 Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
                 okButton.setText("موافق");
                 alertWarning.showAndWait();
@@ -140,7 +136,6 @@ public class MainController implements Initializable {
     private void OnDelete(ActionEvent actionEvent) {
 
         try {
-            vboxOption.setVisible(false);
 
             Vendor selectedVendor = table.getSelectionModel().getSelectedItem();
 
@@ -154,7 +149,7 @@ public class MainController implements Initializable {
                         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
                         alertWarning.setHeaderText("تحذير");
                         alertWarning.setContentText("العامل قام بعدة طلبيات لا يمكن حذفه");
-                        alertWarning.initOwner(this.vboxOption.getScene().getWindow());
+                        alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
                         Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
                         okButton.setText("موافق");
                         alertWarning.showAndWait();
@@ -167,7 +162,7 @@ public class MainController implements Initializable {
                 Alert alertWarning = new Alert(Alert.AlertType.WARNING);
                 alertWarning.setHeaderText("تحذير");
                 alertWarning.setContentText("من فضلك قم بتحديد ما تريد حذفه");
-                alertWarning.initOwner(this.vboxOption.getScene().getWindow());
+                alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
                 Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
                 okButton.setText("موافق");
                 alertWarning.showAndWait();
@@ -175,12 +170,6 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void showHideProviderOperation(ActionEvent actionEvent) {
-        if (vboxOption.isVisible()) vboxOption.setVisible(false);
-        else vboxOption.setVisible(true);
     }
 
     @FXML

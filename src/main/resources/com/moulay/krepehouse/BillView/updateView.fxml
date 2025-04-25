@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane nodeOrientation="RIGHT_TO_LEFT" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.moulay.krepehouse.Controllers.MenuControllers.AddController">
+<DialogPane nodeOrientation="RIGHT_TO_LEFT" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.MenuControllers.UpdateController">
    <header>
       <AnchorPane maxHeight="70.0" prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top">
          <children>
-            <Label layoutX="33.0" layoutY="27.0" styleClass="font-hs-dream" text="إضافة قائمة طعام" textFill="#777777" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="15.0">
+            <Label layoutX="33.0" layoutY="27.0" styleClass="font-hs-dream" text="تعديل قائمة طعام" textFill="#777777" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="15.0">
                <font>
                   <Font size="22.0" />
                </font>
@@ -154,7 +154,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnInsert" layoutX="129.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnSave" prefWidth="105.0" styleClass="add-product-factory" text="حفظ القائمة" textFill="WHITE">
+                              <Button fx:id="btnUpdate" layoutX="129.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnSave" prefWidth="105.0" styleClass="add-product-factory" text="حفظ القائمة" textFill="WHITE">
                                  <font>
                                     <Font name="HSDream-Regular" size="13.0" />
                                  </font>

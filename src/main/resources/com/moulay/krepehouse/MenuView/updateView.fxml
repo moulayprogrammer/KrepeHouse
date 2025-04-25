@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane nodeOrientation="RIGHT_TO_LEFT" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.MenuControllers.UpdateController">
+<DialogPane nodeOrientation="RIGHT_TO_LEFT" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.moulay.krepehouse.Controllers.MenuControllers.UpdateController">
    <header>
       <AnchorPane maxHeight="70.0" prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top">
          <children>

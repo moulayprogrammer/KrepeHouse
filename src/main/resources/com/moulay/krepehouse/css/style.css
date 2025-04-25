@@ -188,7 +188,6 @@
 }
 .parent-menu-item:hover,.parent-menu-item-active{
 	-fx-opacity:1;
-	-tx-transition:0.6 ease-in-out;
 	-fx-font-family: 'HSDream-Regular';
 }	
 .image-menu{
@@ -340,7 +339,7 @@
 	-fx-font-family: 'HSDream-Regular';
     -fx-border-radius: 40px;
     -fx-border-width: 5px;
-    -fx-border-color: 4A8E16;
+    -fx-border-color: A8E16;
 }
 .container-order-food{
     -fx-background-radius: 40px;

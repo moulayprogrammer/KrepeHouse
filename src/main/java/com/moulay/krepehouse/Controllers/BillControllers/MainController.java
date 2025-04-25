@@ -1,7 +1,7 @@
 package com.moulay.krepehouse.Controllers.BillControllers;
 
-import com.moulay.krepehouse.BddPackage.FoodOperation;
-import com.moulay.krepehouse.Models.Food;
+import com.moulay.krepehouse.BddPackage.MenuOperation;
+import com.moulay.krepehouse.Models.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,14 +13,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -34,18 +34,16 @@ public class MainController implements Initializable {
     private TextField tfRecherche;
 
     @FXML
-    TableView<Food> table;
+    TableView<Menu> table;
     @FXML
-    TableColumn<Food,Integer> clId;
+    TableColumn<Menu,Integer> clId;
     @FXML
-    TableColumn<Food,String> clNameAr,clNameFr;
+    TableColumn<Menu,String> clName;
     @FXML
-    TableColumn<Food,Double> clPrice;
-    @FXML
-    TableColumn<Food, Image> clPicture;
+    TableColumn<Menu, LocalDate> clDate;
 
 
-    private final FoodOperation operation = new FoodOperation();
+    private final MenuOperation operation = new MenuOperation();
 
 
     @Override
@@ -53,46 +51,22 @@ public class MainController implements Initializable {
 
         vboxOption.setVisible(false);
 
-        /*clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
-        clNameAr.setCellValueFactory(new PropertyValueFactory<>("nameAr"));
-        clNameFr.setCellValueFactory(new PropertyValueFactory<>("nameFr"));
-        clPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        clPicture.setCellValueFactory(new PropertyValueFactory<>("picture"));
-
-        // Customize image cell
-        clPicture.setCellFactory(col -> new TableCell<>() {
-            private final ImageView imageView = new ImageView();
-
-            {
-                imageView.setFitWidth(100);
-                imageView.setFitHeight(50);
-                imageView.setPreserveRatio(true);
-            }
-
-            @Override
-            protected void updateItem(Image image, boolean empty) {
-                super.updateItem(image, empty);
-                if (empty || image == null) {
-                    setGraphic(null);
-                } else {
-                    imageView.setImage(image);
-                    setGraphic(imageView);
-                }
-            }
-        });
+        clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
+        clName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        clDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         tfRecherche.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.isEmpty()) ActionSearch();
             else refresh();
         });
 
-        refresh();*/
+        refresh();
     }
 
     @FXML
     private void OnAdd(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/FoodView/addView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/MenuView/addView.fxml"));
             DialogPane temp = loader.load();
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(temp);
@@ -112,18 +86,18 @@ public class MainController implements Initializable {
 
     @FXML
     private void OnUpdate() {
-        /*try {
+        try {
             vboxOption.setVisible(false);
 
-            Food selectedFood = table.getSelectionModel().getSelectedItem();
+            Menu selectedMenu = table.getSelectionModel().getSelectedItem();
 
-            if (selectedFood != null) {
+            if (selectedMenu != null) {
                 try {
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/FoodView/updateView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/MenuView/updateView.fxml"));
                     DialogPane temp = loader.load();
                     UpdateController controller = loader.getController();
-                    controller.Init(selectedFood);
+                    controller.Init(selectedMenu);
                     Dialog<ButtonType> dialog = new Dialog<>();
                     dialog.setDialogPane(temp);
                     dialog.resizableProperty().setValue(false);
@@ -148,32 +122,21 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
     private void OnDelete(ActionEvent actionEvent) {
 
-        /*try {
+        try {
             vboxOption.setVisible(false);
 
-            Food selectedFood = table.getSelectionModel().getSelectedItem();
+             Menu selectedMenu = table.getSelectionModel().getSelectedItem();
 
-            if (selectedFood != null) {
+            if (selectedMenu != null) {
                 try {
-
-                    if (!operation.isExistInBills(selectedFood) && !operation.isExistInMenu(selectedFood)){
-                        operation.delete(selectedFood);
-                        refresh();
-                    }else {
-                        Alert alertWarning = new Alert(Alert.AlertType.WARNING);
-                        alertWarning.setHeaderText("تحذير");
-                        alertWarning.setContentText("الوجبة تم استعمالها في طلب او قائمة طعام");
-                        alertWarning.initOwner(this.vboxOption.getScene().getWindow());
-                        Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
-                        okButton.setText("موافق");
-                        alertWarning.showAndWait();
-                    }
+                    operation.delete(selectedMenu);
+                    refresh();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -189,7 +152,7 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
@@ -200,33 +163,29 @@ public class MainController implements Initializable {
 
     @FXML
     void ActionSearch() {
-        /*try {
+        try {
             // filtrer les données
-            ObservableList<Food> dataFacture = table.getItems();
-            FilteredList<Food> filteredData = new FilteredList<>(dataFacture, e -> true);
+            ObservableList<Menu> dataFacture = table.getItems();
+            FilteredList<Menu> filteredData = new FilteredList<>(dataFacture, e -> true);
             String txtRecherche = tfRecherche.getText().trim();
 
             filteredData.setPredicate(food -> {
                 if (txtRecherche.isEmpty()) {
                     refresh();
                     return true;
-                } else if (food.getNameAr().contains(txtRecherche)) {
+                } else if (food.getName().contains(txtRecherche)) {
 
                     return true;
-                } else if (food.getNameFr().contains(txtRecherche)) {
-                    return true;
-                } else if (food.getDescription().contains(txtRecherche)) {
-                    return true;
-                } else return String.valueOf(food.getPrice()).contains(txtRecherche);
+                } else return  (food.getDate().format( DateTimeFormatter.ofPattern("dd-MM-yyyy")).contains(txtRecherche));
             });
 
-            SortedList<Food> sortedList = new SortedList<>(filteredData);
+            SortedList<Menu> sortedList = new SortedList<>(filteredData);
             sortedList.comparatorProperty().bind(table.comparatorProperty());
             table.setItems(sortedList);
 
         }catch (Exception e){
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
@@ -241,12 +200,12 @@ public class MainController implements Initializable {
     }
 
     private void refresh(){
-        ArrayList<Food> foods = operation.getAll();
-        ObservableList<Food> foodObservableList = FXCollections.observableArrayList();
-        foodObservableList.addAll(foods);
-        table.setItems(foodObservableList );
+        ArrayList<Menu> menus = operation.getAll();
+        ObservableList<Menu> menuObservableList = FXCollections.observableArrayList();
+        menuObservableList.addAll(menus);
+        table.setItems(menuObservableList );
 
-        lbNumber.setText(String.valueOf(foods.size()));
+        lbNumber.setText(String.valueOf(menus.size()));
     }
 
 

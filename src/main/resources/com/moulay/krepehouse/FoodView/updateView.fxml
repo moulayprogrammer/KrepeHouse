@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<DialogPane nodeOrientation="RIGHT_TO_LEFT" prefWidth="450.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.FoodControllers.UpdateController">
+<DialogPane nodeOrientation="RIGHT_TO_LEFT" prefWidth="450.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.moulay.krepehouse.Controllers.FoodControllers.UpdateController">
    <header>
       <AnchorPane prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top" BorderPane.alignment="CENTER">
          <BorderPane.margin>

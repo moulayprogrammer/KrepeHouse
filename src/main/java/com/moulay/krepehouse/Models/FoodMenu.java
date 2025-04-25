@@ -21,6 +21,11 @@ public class FoodMenu {
         this.updateAt = updateAt;
     }
 
+    public FoodMenu(int uniqueIdMenu, int uniqueIdFood) {
+        this.uniqueIdMenu = uniqueIdMenu;
+        this.uniqueIdFood = uniqueIdFood;
+    }
+
     public int getUniqueId() {
         return uniqueId;
     }

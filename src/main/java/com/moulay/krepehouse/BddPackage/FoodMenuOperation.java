@@ -122,29 +122,20 @@ public class FoodMenuOperation extends BDD<FoodMenu>{
         return list;
     }
 
-    public ArrayList<FoodMenu> getAllByMenu(int idMenu) {
+    public boolean deleteAllByMenu(int idMenu) {
         connectDatabase();
-        ArrayList<FoodMenu> list = new ArrayList<>();
-        String query = "SELECT * FROM `food_menu` WHERE `UniqueID_MENU`= ?";
+        boolean del = false;
+        String query = "DELETE FROM `food_menu` WHERE `UniqueID_MENU` = ?";
         try {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt(1,idMenu);
-            ResultSet resultSet = preparedStmt.executeQuery();
-            while (resultSet.next()){
 
-                FoodMenu foodMenu = new FoodMenu();
-                foodMenu.setUniqueId(resultSet.getInt("UniqueID"));
-                foodMenu.setUniqueIdMenu(resultSet.getInt("UniqueID_MENU"));
-                foodMenu.setUniqueIdFood(resultSet.getInt("UniqueID_FOOD"));
-                foodMenu.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
-                foodMenu.setUpdateAt(resultSet.getTimestamp("UPDATE_AT").toLocalDateTime());
-
-                list.add(foodMenu);
-            }
+            int delete = preparedStmt.executeUpdate();
+            if(delete != -1) del = true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         closeDatabase();
-        return list;
+        return del;
     }
 }

@@ -14,10 +14,11 @@ public class MenuOperation extends BDD<Menu>{
     public boolean insert(Menu o) {
         connectDatabase();
         boolean ins = false;
-        String query = "INSERT INTO `menu` (`DATE`) VALUES (?) ;";
+        String query = "INSERT INTO `menu` (`Name`,`DATE`) VALUES (?,?) ;";
         try {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setDate(1, Date.valueOf(o.getDate()));
+            preparedStmt.setString(1, o.getName());
+            preparedStmt.setDate(2, Date.valueOf(o.getDate()));
 
             int insert = preparedStmt.executeUpdate();
             if(insert != -1) ins = true;
@@ -31,13 +32,21 @@ public class MenuOperation extends BDD<Menu>{
     public int insertId(Menu o) {
         connectDatabase();
         int ins = 0;
-        String query = "INSERT INTO `menu` (`DATE`) VALUES (?) ;";
+        String query = "INSERT INTO `menu` (`Name`,`DATE`) VALUES (?,?) ;";
         try {
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setDate(1, Date.valueOf(o.getDate()));
+            PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setString(1, o.getName());
+            preparedStmt.setDate(2, Date.valueOf(o.getDate()));
 
             int insert = preparedStmt.executeUpdate();
-            if(insert != -1) ins = preparedStmt.getGeneratedKeys().getInt(1);
+
+            if (insert > 0) {
+                try (ResultSet rs = preparedStmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        ins = rs.getInt(1);  // Get the auto-generated ID
+                    }
+                }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,12 +59,13 @@ public class MenuOperation extends BDD<Menu>{
     public boolean update(Menu o1, Menu o2) {
         connectDatabase();
         boolean upd = false;
-        String query = "UPDATE `menu` SET `DATE`= ?, `UPDATE_AT`= ? WHERE `UniqueID`= ?";
+        String query = "UPDATE `menu` SET `Name`= ?, `DATE`= ?, `UPDATE_AT`= ? WHERE `UniqueID`= ?";
         try {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setDate(1, Date.valueOf(o1.getDate()));
-            preparedStmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
-            preparedStmt.setInt(3,o2.getUniqueId());
+            preparedStmt.setString(1, o1.getName());
+            preparedStmt.setDate(2, Date.valueOf(o1.getDate()));
+            preparedStmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStmt.setInt(4,o2.getUniqueId());
 
             int update = preparedStmt.executeUpdate();
             if(update != -1) upd = true;
@@ -101,6 +111,7 @@ public class MenuOperation extends BDD<Menu>{
 
                 Menu menu = new Menu();
                 menu.setUniqueId(resultSet.getInt("UniqueID"));
+                menu.setName(resultSet.getString("Name"));
                 menu.setDate(resultSet.getDate("DATE").toLocalDate());
                 menu.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
                 menu.setUpdateAt(resultSet.getTimestamp("UPDATE_AT").toLocalDateTime());
@@ -125,6 +136,7 @@ public class MenuOperation extends BDD<Menu>{
             if (resultSet.next()){
 
                 menu.setUniqueId(resultSet.getInt("UniqueID"));
+                menu.setName(resultSet.getString("Name"));
                 menu.setDate(resultSet.getDate("DATE").toLocalDate());
                 menu.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
                 menu.setUpdateAt(resultSet.getTimestamp("UPDATE_AT").toLocalDateTime());

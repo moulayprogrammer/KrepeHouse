@@ -7,6 +7,7 @@ import java.time.LocalTime;
 public class Menu {
 
     private int uniqueId;
+    private String name;
     private LocalDate date;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
@@ -21,12 +22,25 @@ public class Menu {
         this.updateAt = updateAt;
     }
 
+    public Menu(String name, LocalDate date) {
+        this.name = name;
+        this.date = date;
+    }
+
     public int getUniqueId() {
         return uniqueId;
     }
 
     public void setUniqueId(int uniqueId) {
         this.uniqueId = uniqueId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDate getDate() {

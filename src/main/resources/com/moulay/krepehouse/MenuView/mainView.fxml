@@ -19,7 +19,7 @@
                           <columns>
                             <TableColumn fx:id="clId" prefWidth="100.0" styleClass="column-table" text="#" />
                               <TableColumn fx:id="clName" prefWidth="304.0" styleClass="column-table" text="الاسم" />
-                              <TableColumn fx:id="clPhone" prefWidth="283.0" styleClass="column-table" text="رقم الهاتف" />
+                              <TableColumn fx:id="clDate" prefWidth="283.0" styleClass="column-table" text="التاريخ" />
                           </columns>
                         </TableView>
                      </children>

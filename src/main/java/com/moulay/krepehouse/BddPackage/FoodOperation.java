@@ -320,4 +320,43 @@ public class FoodOperation extends BDD<Food>{
         closeDatabase();
         return ex;
     }
+
+    public ArrayList<Food> getAllFoodByMenu(int idMenu) {
+
+        connectDatabase();
+        ArrayList<Food> list = new ArrayList<>();
+        String query = "SELECT `food`.`UniqueID` , `NAME_AR`, `NAME_FR`, `PRICE`, `DESCRIPTION`, `PICTURE`,\n" +
+                "`ARCHIVE`,`food`.`CREATE_AT`,`food`.`UPDATE_AT`\n" +
+                "FROM `food` \n" +
+                "JOIN `food_menu` ON `food`.`UniqueID` = `food_menu`.`UniqueID_FOOD`\n" +
+                "JOIN `menu` ON `menu`.`UniqueID` = `food_menu`.`UniqueID_MENU`\n" +
+                "WHERE `menu`.`UniqueID` = ?";
+        try {
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setInt(1,idMenu);
+            ResultSet resultSet = preparedStmt.executeQuery();
+            while (resultSet.next()){
+
+                Food food = new Food();
+                food.setUniqueId(resultSet.getInt("UniqueID"));
+                food.setNameAr(resultSet.getString("NAME_AR"));
+                food.setNameFr(resultSet.getString("NAME_FR"));
+                food.setPrice(resultSet.getFloat("PRICE"));
+                food.setDescription(resultSet.getString("DESCRIPTION"));
+
+                byte[] bytes = resultSet.getBytes("PICTURE");
+                InputStream is = new ByteArrayInputStream(bytes);
+                food.setPicture(new Image(is));
+
+                food.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
+                food.setUpdateAt(resultSet.getTimestamp("UPDATE_AT").toLocalDateTime());
+
+                list.add(food);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeDatabase();
+        return list;
+    }
 }

@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Food {
 
@@ -111,4 +112,18 @@ public class Food {
     public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Food food = (Food) o;
+        return Objects.equals(uniqueId, food.getUniqueId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uniqueId);
+    }
+
 }

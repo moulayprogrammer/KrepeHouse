@@ -1,7 +1,11 @@
 @font-face {
     src: url('../fonts/HSDream-Regular.otf');
 }
-
+/*Define variables */
+:root {
+    -fx-primary: #3DAABB;
+    -fx-white: #FFFFFF;
+}
 .container{
 	-fx-background-color:#FBFBFB;
 	-fx-font-family: 'HSDream-Regular';
@@ -21,18 +25,9 @@
 .number-of-list{
 	-fx-font-family: 'HSDream-Regular';
 }
-.add-new-item,.add-product-factory,.more-button-products, .add-product-all, .add-picture-food, .confirm_order{
-	-fx-background-color:#42B3C5;
-	-fx-font-family: 'HSDream-Regular';
-	-fx-border-radius:3;
-}
-.add-product-all:hover{
-	-fx-font-size:14;
-	-fx-background-color:#3DAABB;
-	-fx-font-family: 'HSDream-Regular';
-}
 .add-new-item icon{
 	-fx-font-size:20;
+	-fx-fill: #FFFFFF;
 	-fx-font-family: 'HSDream-Regular';
 }
 .add-product-factory:hover{
@@ -40,115 +35,19 @@
 	-fx-background-color:#3DAABB;
 	-fx-font-family: 'HSDream-Regular';
 }
-.more-button-products:hover{
-	-fx-font-size:13;
-	-fx-background-color:#3DAABB;
-	-fx-font-family: 'HSDream-Regular';	
-}
 .confirm_order:hover{
 	-fx-background-color:#3DAABB;
-	-fx-font-family: 'HSDream-Regular';	
+	-fx-font-family: 'HSDream-Regular';
 	-fx-font-size:14;
-}
-
-.more-button{
-	-fx-background-color:#ffffff;
-	-fx-font-family: 'HSDream-Regular';
-    -fx-background-radius:0;
-    -fx-border-color:#D5D5D5;
-    -fx-border-width: 1 1 1 1;
-    -fx-background-insets: 0;
-	-fx-border-radius:3;
-}
-.add-new-item:hover{
-	-fx-font-size:16;
-	-fx-background-color:#3DAABB;
-	-fx-font-family: 'HSDream-Regular';
-}
-.more-button:hover{
-	-fx-font-size:16;
-	-fx-background-color:#FBFBFB;
-	-fx-font-family: 'HSDream-Regular';
-}
-
-.save-button,.save-button-small{
-	-fx-background-color:#42B3C5;
-	-fx-font-family: 'HSDream-Regular';
-	-fx-font-family: 'HSDream-Regular';
-}
-.add-product{
-	-fx-background-color:#42B3C5;
-	-fx-font-family: 'HSDream-Regular';
-}
-
-.save-button-small:hover{
-	-fx-font-size:13;
-	-fx-background-color:#3DAABB;
-	-fx-font-family: 'HSDream-Regular';
-}
-.add-product:hover{
-	-fx-background-color:#3DAABB;
-	-fx-font-family: 'HSDream-Regular';
-}
-.cancle-button,.cancle-button-small{
-	-fx-background-color:#818181;
-	-fx-font-family: 'HSDream-Regular';
-	-fx-font-family: 'HSDream-Regular';
-}
-.cancle-button-small:hover{
-	-fx-font-size:13;
-	-fx-background-color:#989898;
-	-fx-font-family: 'HSDream-Regular';
-}
-.printer-button,.remove-product-from-factory,.printer-button-small, .remove-picture-food{
-	-fx-background-color:#EE3D48;
-	-fx-font-family: 'HSDream-Regular';
-	-fx-font-family: 'HSDream-Regular';
-}
-.printer-button-small:hover{
-	-fx-font-size:13;
-	-fx-background-color:#E2323D;
-	-fx-font-family: 'HSDream-Regular';
 }
 .remove-product-from-factory:hover{
 	-fx-font-size:13;
 	-fx-background-color:#E2323D;
 	-fx-font-family: 'HSDream-Regular';
-	
-}
-.extract-button, .all-jobs{
-	-fx-background-color:#FBFBFB;
-	-fx-font-family: 'HSDream-Regular';
-	-fx-border-color:#D5D5D5;
-    -fx-border-width: 1 1 1 1;
-    -fx-background-insets: 0;
-	-fx-border-radius:3;
-	-fx-font-family: 'HSDream-Regular';
+
 }
 .all-jobs:hover{
 	-fx-font-size:14;
-	-fx-background-color:#F3F3F3;
-	-fx-font-family: 'HSDream-Regular';
-}
-
-.save-button:hover{
-	-fx-font-size:14;
-	-fx-background-color:#3DAABB;
-	-fx-font-family: 'HSDream-Regular';
-}
-.cancle-button:hover{
-	-fx-font-size:15;
-	-fx-background-color:#989898;
-	-fx-font-family: 'HSDream-Regular';
-}
-.printer-button:hover{
-	-fx-font-size:15;
-	-fx-background-color:#E2323D;
-	-fx-font-family: 'HSDream-Regular';
-}
-
-.extract-button:hover{
-	-fx-font-size:12;
 	-fx-background-color:#F3F3F3;
 	-fx-font-family: 'HSDream-Regular';
 }
@@ -156,6 +55,7 @@
 	-fx-background-color:#ffffff;
 	-fx-border-color:#ffffff;
 	-fx-font-family: 'HSDream-Regular';
+	-fx-padding: 8 64 8 64;
 }
 
 .search-input{
@@ -174,14 +74,14 @@
 	-fx-font-family: 'HSDream-Regular';
 }
 
-.btn-menu{
+/*.btn-menu{
 	-fx-background-color:transaprent;
 	-fx-font-family: 'HSDream-Regular';
 	-fx-text-fill:#ffffff;
 	-fx-font-size:18;
 	-fx-font-family: 'HSDream-Regular';
 	-fx-cursor:hand;
-}
+}*/
 .parent-menu-item{
 	-fx-opacity:0.85;
 	-fx-font-family: 'HSDream-Regular';
@@ -189,7 +89,7 @@
 .parent-menu-item:hover,.parent-menu-item-active{
 	-fx-opacity:1;
 	-fx-font-family: 'HSDream-Regular';
-}	
+}
 .image-menu{
 	-fx-border-color:#ffffff;
     -fx-border-width: 3;
@@ -204,33 +104,20 @@
     -fx-background-insets: 0;
 	-fx-border-radius:0 10 10 0;
 	-fx-font-family: 'HSDream-Regular';
-	
+
 }
 
 .table-view .column-header,
 .table-view .column-header-background .filler {
-    -fx-background-color:  #ffffff; 
+    -fx-background-color:  #ffffff;
 	-fx-font-family: 'HSDream-Regular';
 }
 .table-view .column-header .label{
    -fx-text-fill: #848484;
-   -fx-font-weight: bold; 
+   -fx-font-weight: bold;
    -fx-alignment: CENTER_LEFT;
    -fx-font-family: 'HSDream-Regular';
 	-fx-font-size:14;
-}
-
-.hover-anchor{
-	-fx-hgap: 20px;
-    -fx-padding: 40px;
-	-fx-font-family: 'HSDream-Regular';
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 0 20 20 0;
-
-    -fx-border-radius: 50px;
-    -fx-border-width: 5px;
-    -fx-border-color: white;
-   
 }
 .show-all-products{
 	-fx-background-color:#FBFBFB;
@@ -272,15 +159,6 @@
 	-fx-border-color:#D5D5D5;
 	-fx-font-family: 'HSDream-Regular';
 }
-.pagination-button{
-	-fx-background-color: #F2F2F2;
-	-fx-font-family: 'HSDream-Regular';
-}
-.pagination-button:hover{
-	-fx-background-color:#E8E8E8;
-	-fx-font-family: 'HSDream-Regular';
-	
-}
 .image-close-pop:hover{
 	-fx-opacity:1;
 	-fx-font-family: 'HSDream-Regular';
@@ -300,19 +178,13 @@
 	-fx-border-color: #ddd;
 	-fx-border-radius:5;
 	-fx-border-width:2;
-	
+
 }
 
 .input-popup{
 	-fx-prompt-text-fill: #515151;
 	-fx-font-family: 'HSDream-Regular';
 }
-.button-edit-delete{
-	-fx-background-color:white;
-	-fx-font-family: 'HSDream-Regular';
-	-fx-border-color:white;
-}
-
 .container-edit-delete{
 	-fx-border-width: 1 1 1 1;
     -fx-background-insets: 1;
@@ -320,7 +192,7 @@
 	-fx-border-color:#D5D5D5;
 	-fx-background-color:white;
 	-fx-font-family: 'HSDream-Regular';
-	
+
 }
 
 .dashboard-item{
@@ -347,4 +219,46 @@
     -fx-border-radius: 20px;
 	-fx-border-color: #E6E6E6;
     -fx-border-width: 2px;
+}
+
+.hbox {
+    -fx-padding: 16 64 16 64;
+}
+
+.button-with-icon {
+    -fx-text-fill: #FFFFFF;
+	-fx-background-color: #3DAABB;
+	-fx-border: 1px solid;
+	-fx-border-color: #3DAABB;
+	-fx-border-radius:3;
+	-fx-font-family: 'HSDream-Regular';
+}
+
+.button-with-icon:hover {
+    -fx-text-fill: #3DAABB;
+	-fx-background-color: #FFFFFF;
+	-fx-border: 1px solid;
+	-fx-border-color: #3DAABB;
+	-fx-border-radius:3;
+	-fx-font-family: 'HSDream-Regular';
+}
+
+.button-with-icon:hover FontAwesomeIconView {
+    -fx-fill: #3DAABB;
+}
+
+.input {
+    -fx-border: 1px solid;
+    -fx-border-color: #3DAABB;
+    -fx-border-radius:3;
+}
+
+.total-label {
+    -fx-background-color: #7d7d7d;
+    -fx-text-fill: white;
+    -fx-padding: 8px;
+	-fx-border: 15px solid;
+	-fx-border-color: #3DAABB;
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
 }

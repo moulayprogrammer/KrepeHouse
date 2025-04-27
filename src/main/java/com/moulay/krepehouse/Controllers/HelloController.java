@@ -24,6 +24,7 @@ public class HelloController implements Initializable {
 
         vendorTab.setContent(new TextField());
 
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/moulay/krepehouse/FoodView/mainView.fxml"));
             BorderPane temp = fxmlLoader.load();

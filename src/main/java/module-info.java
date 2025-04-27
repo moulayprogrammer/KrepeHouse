@@ -13,15 +13,6 @@ module com.moulay.krepehouse {
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.desktop;
     requires javafx.swing;
-    requires spring.aop;
-    requires spring.boot;
-    requires spring.boot.autoconfigure;
-    requires spring.context;
-    requires spring.web;
-    requires spring.core;
-    requires spring.beans;
-    requires org.slf4j;
-    requires slf4j.reload4j;
 
     opens com.moulay.krepehouse to javafx.fxml;
     exports com.moulay.krepehouse;
@@ -44,6 +35,5 @@ module com.moulay.krepehouse {
     exports com.moulay.krepehouse.Controllers.MenuControllers;
     opens com.moulay.krepehouse.Controllers.MenuControllers to javafx.fxml;
 
-    exports com.moulay.krepehouse.Server;
-    opens com.moulay.krepehouse.Server to spring.core;
+
 }

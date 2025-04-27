@@ -5,12 +5,12 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -18,11 +18,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" prefHeight="720.0" prefWidth="960.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.MenuControllers.AddController">
-   <header>
-      <AnchorPane maxHeight="70.0" prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top">
+<BorderPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="720.0" prefWidth="960.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.MenuControllers.AddController">
+   <top>
+      <AnchorPane maxHeight="70.0" prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="128.8" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="203.0" styleClass="font-hs-dream" text="إضافة قائمة طعام" textFill="#777777" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="15.0">
+            <Label layoutX="128.8" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="203.0" styleClass="font-hs-dream" text="اضافة طلبية" textFill="#777777" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="15.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -32,29 +32,12 @@
             <Insets left="32.0" />
          </padding>
       </AnchorPane>
-   </header>
-   <content>
-      <VBox maxHeight="1.7976931348623157E308" spacing="5.0">
+   </top>
+   <center>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0">
          <children>
             <HBox maxWidth="1.7976931348623157E308" prefHeight="25.0" spacing="10.0">
                <children>
-                  <Label maxHeight="1.7976931348623157E308" styleClass="font-hs-dream" text="الأسم" textFill="#777777" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="tfName" focusTraversable="false" prefHeight="33.0" prefWidth="250.0" promptText="أدخل إسم لقائمة الطعام" styleClass="input" />
-                  <Button mnemonicParsing="false" onAction="#ActionSearch" prefHeight="32.0" prefWidth="55.0" styleClass="button-with-icon" textFill="#828282">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15.0" text="" />
-                     </graphic>
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </Button>
                   <Label maxHeight="1.7976931348623157E308" styleClass="font-hs-dream" text="الرقم" textFill="#777777">
                      <font>
                         <Font size="16.0" />
@@ -73,7 +56,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="200.0" styleClass="input" />
+                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="150.0" styleClass="input" />
                </children>
                <padding>
                   <Insets left="32.0" right="32.0" />
@@ -88,28 +71,46 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
-                     <HBox spacing="10.0" />
+                     <TextField fx:id="tfName" focusTraversable="false" prefHeight="33.0" prefWidth="250.0" promptText="البحث" styleClass="input" />
                      <GridPane hgap="3.0" maxHeight="1.7976931348623157E308" vgap="3.0" VBox.vgrow="ALWAYS">
                        <columnConstraints>
                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                        </columnConstraints>
                        <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                        </rowConstraints>
                      </GridPane>
-                     <HBox />
-                     <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="15.0" />
                      <HBox.margin>
-                        <Insets left="32.0" right="32.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
                   <VBox spacing="10.0" styleClass="container-table">
                      <children>
-                        <HBox spacing="10.0" />
-                        <TableView fx:id="tableMenu" maxHeight="1.7976931348623157E308" onMouseClicked="#tableMenuClick" styleClass="container-table" VBox.vgrow="ALWAYS">
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"  prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="الكمية" textFill="#828282" HBox.hgrow="ALWAYS">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" text="" />
+                                 </graphic>
+                              </Button>
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"  prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="السعر" textFill="#828282" HBox.hgrow="ALWAYS">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" text="" />
+                                 </graphic>
+                              </Button>
+                           </children></HBox>
+                        <TableView fx:id="tableMenu" maxHeight="1.7976931348623157E308" minWidth="300.0" onMouseClicked="#tableMenuClick" styleClass="container-table" VBox.vgrow="ALWAYS">
                            <columns>
                               <TableColumn fx:id="clNameArMenu" prefWidth="100.0" styleClass="column-table" text="الصورة" />
                               <TableColumn fx:id="clPictureMenu" prefWidth="135.0" styleClass="column-table" text="الأسم" />
@@ -125,31 +126,35 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </HBox>
-            <HBox>
+            <HBox maxWidth="1.7976931348623157E308">
                <children>
-                  <Button mnemonicParsing="false" onAction="#ActionSearch" prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="الغاء" textFill="#828282" HBox.hgrow="ALWAYS">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" text="" />
-                     </graphic>
+                  <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets />
                      </HBox.margin>
-                  </Button>
-                  <Button layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="تأكيد" textFill="#828282">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="XMARK" size="15.0" text="" />
-                     </graphic>
-                  </Button>
-                  <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="150.0" styleClass="total-label" text="9999999,999" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets left="700.0" />
-                     </HBox.margin>
+                     <children>
+                        <Button mnemonicParsing="false"  prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="الغاء" textFill="#828282" HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" text="" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="تأكيد" textFill="#828282">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="XMARK" size="15.0" text="" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="250.0" styleClass="total-label" text="9999999,999">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -161,5 +166,8 @@
             <Insets left="32.0" right="32.0" />
          </padding>
       </VBox>
-   </content>
-</DialogPane>
+   </center>
+   <padding>
+      <Insets bottom="5.0" />
+   </padding>
+</BorderPane>

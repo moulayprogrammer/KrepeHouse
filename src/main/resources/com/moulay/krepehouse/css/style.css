@@ -225,11 +225,45 @@
     -fx-padding: 16 64 16 64;
 }
 
+.hbox-border {
+    -fx-border-color: green;      /* border color */
+    -fx-border-width: 2px;         /* border thickness */
+    -fx-border-radius: 10px;       /* optional: rounded corners */
+    -fx-background-radius: 10px;   /* match background rounding */
+    -fx-padding: 10px;             /* space inside the HBox */
+}
+
 .button-with-icon {
     -fx-text-fill: #FFFFFF;
 	-fx-background-color: #3DAABB;
 	-fx-border: 1px solid;
 	-fx-border-color: #3DAABB;
+	-fx-border-radius:3;
+	-fx-font-family: 'HSDream-Regular';
+}
+
+.confirm-button {
+    -fx-text-fill: #FFFFFF;
+	-fx-background-color: #32a852;
+	-fx-border: 1px solid;
+	-fx-border-color: #32a852;
+	-fx-border-radius:3;
+	-fx-font-family: 'HSDream-Regular';
+}
+.confirm-button:hover {
+    -fx-text-fill: #32a852
+    -fx-background: white;
+    -fx-border: 1px solid;
+    -fx-border-color: #32a852;
+    -fx-border-radius:3;
+    -fx-font-family: 'HSDream-Regular';
+}
+
+.cancel-button {
+    -fx-text-fill: #FFFFFF;
+	-fx-background-color: #e35656;
+	-fx-border: 1px solid;
+	-fx-border-color: #e35656;
 	-fx-border-radius:3;
 	-fx-font-family: 'HSDream-Regular';
 }
@@ -258,7 +292,13 @@
     -fx-text-fill: white;
     -fx-padding: 8px;
 	-fx-border: 15px solid;
-	-fx-border-color: #3DAABB;
+	-fx-border-color: #212121;
 	-fx-border-radius: 10px;
 	-fx-background-radius: 10px;
+}
+
+.card {
+    -fx-border: 1px solid;
+    -fx-border-color: #3DAABB;
+    -fx-border-radius:3;
 }

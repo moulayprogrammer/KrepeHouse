@@ -93,7 +93,7 @@
                      <children>
                         <HBox spacing="10.0">
                            <children>
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"  prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="الكمية" textFill="#828282" HBox.hgrow="ALWAYS">
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="الكمية" textFill="#828282" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -101,7 +101,7 @@
                                     <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" text="" />
                                  </graphic>
                               </Button>
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"  prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="السعر" textFill="#828282" HBox.hgrow="ALWAYS">
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="السعر" textFill="#828282" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -128,31 +128,40 @@
             </HBox>
             <HBox maxWidth="1.7976931348623157E308">
                <children>
-                  <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" spacing="10.0" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <children>
-                        <Button mnemonicParsing="false"  prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="الغاء" textFill="#828282" HBox.hgrow="ALWAYS">
+                        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="cancel-button" text="الغاء" textFill="#828282" HBox.hgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" text="" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="xmark" size="15.0" text="" />
                            </graphic>
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="button-with-icon" text="تأكيد" textFill="#828282">
+                        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="confirm-button" text="تأكيد" textFill="#828282">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="XMARK" size="15.0" text="" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="check" size="15.0" text="" />
                            </graphic>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Button>
                      </children>
+                     <padding>
+                        <Insets right="25.0" />
+                     </padding>
                   </HBox>
                   <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="250.0" styleClass="total-label" text="9999999,999">
                      <font>

@@ -128,6 +128,33 @@ public class VendorOperation extends BDD<Vendor>{
         return list;
     }
 
+    public Vendor isExistLogin(Vendor o) {
+        connectDatabase();
+        Vendor vendor = new Vendor();
+        String query = " SELECT * FROM `vendor` WHERE  `USERNAME`= ? AND `PASSWORD`= ?;";
+        try {
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1,o.getUsername());
+            preparedStmt.setString(2,o.getPassword());
+            ResultSet resultSet = preparedStmt.executeQuery();
+            if (resultSet.next()){
+
+                vendor.setUniqueId(resultSet.getInt("UniqueID"));
+                vendor.setName(resultSet.getString("NAME"));
+                vendor.setPhone(resultSet.getString("PHONE"));
+                vendor.setUsername(resultSet.getString("USERNAME"));
+                vendor.setPassword(resultSet.getString("PASSWORD"));
+                vendor.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
+                vendor.setUpdateAt(resultSet.getTimestamp("UPDATE_AT").toLocalDateTime());
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeDatabase();
+        return  vendor;
+    }
+
     public Vendor get(int id) {
         connectDatabase();
         Vendor vendor = new Vendor();

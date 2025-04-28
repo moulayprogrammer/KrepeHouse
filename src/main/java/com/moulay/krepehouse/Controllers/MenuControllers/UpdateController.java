@@ -246,7 +246,7 @@ public class UpdateController implements Initializable {
 
         if ( !name.isEmpty() && date != null && !tableMenu.getItems().isEmpty()){
 
-            Menu menu = new Menu(name,date);
+            Menu menu = new Menu(name,date, selectedMenu.isSelect());
 
             operation.update(menu,selectedMenu);
             foodMenuOperation.deleteAllByMenu(selectedMenu.getUniqueId());

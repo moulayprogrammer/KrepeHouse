@@ -1,20 +1,29 @@
 package com.moulay.krepehouse.Clients;
 
+import com.moulay.krepehouse.BddPackage.FoodOperation;
 import com.moulay.krepehouse.BddPackage.VendorOperation;
+import com.moulay.krepehouse.Models.SimpleFood;
 import com.moulay.krepehouse.Models.Vendor;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class LoginClient implements Runnable{
+public class FoodClient implements Runnable{
 
     private final Socket clientSocket;
     ObjectInputStream ois;
     ObjectOutputStream oos;
-    private final VendorOperation operation = new VendorOperation();
 
 
-    public LoginClient(Socket socket) throws IOException {
+    private final FoodOperation operation = new FoodOperation();
+
+
+    public FoodClient(Socket socket) throws IOException {
         this.clientSocket = socket;
     }
 
@@ -23,20 +32,33 @@ public class LoginClient implements Runnable{
     public void run() {
         try {
             // Initialize streams
-            ois = new ObjectInputStream(clientSocket.getInputStream());
             oos = new ObjectOutputStream(clientSocket.getOutputStream());
+            ois = new ObjectInputStream(clientSocket.getInputStream());
 
-            // Receive object from client
-            Object received = ois.readObject();
-            if (received instanceof Vendor) {
-                Vendor clientVendor = (Vendor) received;
-                System.out.println("Received from client: " + clientVendor);
+            // Receive request from client
+            String request = (String) ois.readObject();
+            System.out.println("Received request: " + request);
+
+
+            if (request.equals("get")){
+
+                // Create sample food list
+                List<SimpleFood> foodList = operation.getAllFoodByMenuSelected();
 
                 // Create and send response
-                Vendor vendor = operation.isExistLogin(clientVendor);
-                oos.writeObject(vendor);
+                oos.writeObject(foodList);
                 oos.flush();
+
+                // Wait for client acknowledgment if needed
+                try {
+//                    clientSocket.setSoTimeout(5000); // 5-second timeout
+                    Object ack = ois.readObject(); // Wait for client acknowledgment
+                } catch (SocketTimeoutException e) {
+                    System.out.println("Client didn't acknowledge, but data was sent");
+                }
             }
+
+
 
         } catch (IOException | ClassNotFoundException e) {
             log("Error with client connection: " + e.getMessage());

@@ -134,6 +134,7 @@
             </HBox>
             <TableView fx:id="table" maxHeight="1.7976931348623157E308" onMouseClicked="#tableClick" styleClass="table" VBox.vgrow="ALWAYS">
               <columns>
+                  <TableColumn fx:id="clSelect" prefWidth="100.0" styleClass="column-table" text="تحديد" />
                 <TableColumn fx:id="clId" prefWidth="100.0" styleClass="column-table" text="#" />
                   <TableColumn fx:id="clName" prefWidth="304.0" styleClass="column-table" text="الاسم" />
                   <TableColumn fx:id="clDate" prefWidth="283.0" styleClass="column-table" text="التاريخ" />

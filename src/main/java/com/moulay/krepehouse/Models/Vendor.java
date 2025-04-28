@@ -1,8 +1,12 @@
 package com.moulay.krepehouse.Models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Vendor {
+public class Vendor implements Serializable {
+
+    // Add this line to explicitly define serialVersionUID
+    private static final long serialVersionUID = 1L;  // Can be any long value
 
     private int uniqueId;
     private String name;
@@ -96,5 +100,19 @@ public class Vendor {
 
     public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Vendor{" +
+                "uniqueId=" + uniqueId +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", archive=" + archive +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                '}';
     }
 }

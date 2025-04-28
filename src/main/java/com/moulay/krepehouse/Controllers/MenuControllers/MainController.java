@@ -25,6 +25,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -37,11 +38,14 @@ public class MainController implements Initializable {
     @FXML
     TableView<Menu> table;
     @FXML
+    TableColumn<Menu, Boolean> clSelect;
+    @FXML
     TableColumn<Menu,Integer> clId;
     @FXML
     TableColumn<Menu,String> clName;
     @FXML
     TableColumn<Menu, LocalDate> clDate;
+
 
 
     private final MenuOperation operation = new MenuOperation();
@@ -53,6 +57,51 @@ public class MainController implements Initializable {
         clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
         clName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        clSelect.setCellValueFactory(new PropertyValueFactory<>("select"));
+
+        // Or using custom cell factory (uncomment if you need more control)
+        clSelect.setCellFactory(col -> new TableCell<Menu, Boolean>() {
+            private final CheckBox checkBox = new CheckBox();
+
+            {
+                checkBox.setOnAction(event -> {
+
+                    Menu menu = getTableView().getItems().get(getIndex());
+
+                    // Create confirmation dialog
+                    Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+                    confirmation.setTitle("تاكيد التحديد");
+                    confirmation.setContentText("هل انت متاكد من تحديد هذه القائمة");
+
+                    // Customize buttons
+                    ButtonType yesButton = new ButtonType("موافق", ButtonBar.ButtonData.YES);
+                    ButtonType noButton = new ButtonType("الغاء", ButtonBar.ButtonData.NO);
+                    confirmation.getButtonTypes().setAll(yesButton, noButton);
+
+                    // Show dialog and wait for response
+                    Optional<ButtonType> result = confirmation.showAndWait();
+
+                    if (result.isPresent() && result.get() == yesButton) {
+                        // User confirmed - perform deletion
+                        operation.unselectedTheSelected();
+                        operation.setSelected(menu);
+                        refresh();
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Boolean selected, boolean empty) {
+                super.updateItem(selected, empty);
+
+                if (empty || selected == null) {
+                    setGraphic(null);
+                } else {
+                    checkBox.setSelected(selected);
+                    setGraphic(checkBox);
+                }
+            }
+        });
 
         tfRecherche.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.isEmpty()) ActionSearch();

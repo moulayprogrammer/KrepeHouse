@@ -224,23 +224,21 @@ public class AddController implements Initializable {
         String name = tfName.getText().trim();
         LocalDate date = dpDate.getValue();
 
+
         if ( !name.isEmpty() && date != null && !tableMenu.getItems().isEmpty()){
 
-            Menu menu = new Menu(name,date);
+            Menu menu = new Menu(name,date,false);
 
             int insert = operation.insertId(menu);
-            tableMenu.getItems().forEach(food -> {
-                FoodMenu foodMenu = new FoodMenu(insert,food.getUniqueId());
-                foodMenuOperation.insert(foodMenu);
-            });
+            if (insert != -1 ) {
 
-            closeDialog(btnInsert);
-            /*boolean ins = insert(food);
-            if (ins){
+                tableMenu.getItems().forEach(food -> {
+                    FoodMenu foodMenu = new FoodMenu(insert, food.getUniqueId());
+                    foodMenuOperation.insert(foodMenu);
+                });
+
                 closeDialog(btnInsert);
-            }else {
-                labelAlert("حدث خطـــأ");
-            }*/
+            }
 
         }else {
             labelAlert("من فضلك املأ كل الحقول الأساسية");

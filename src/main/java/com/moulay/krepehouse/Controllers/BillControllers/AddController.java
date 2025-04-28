@@ -225,7 +225,7 @@ public class AddController implements Initializable {
 
         if ( !name.isEmpty() && date != null && !tableMenu.getItems().isEmpty()){
 
-            Menu menu = new Menu(name,date);
+            Menu menu = new Menu(name,date,true);
 
             int insert = operation.insertId(menu);
             tableMenu.getItems().forEach(food -> {

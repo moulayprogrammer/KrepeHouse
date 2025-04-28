@@ -7,6 +7,7 @@ import java.time.LocalTime;
 public class Menu {
 
     private int uniqueId;
+    private boolean select;
     private String name;
     private LocalDate date;
     private LocalDateTime createAt;
@@ -22,9 +23,18 @@ public class Menu {
         this.updateAt = updateAt;
     }
 
-    public Menu(String name, LocalDate date) {
+    public Menu(String name, LocalDate date, boolean select) {
         this.name = name;
         this.date = date;
+        this.select = select;
+    }
+
+    public boolean isSelect() {
+        return select;
+    }
+
+    public void setSelect(boolean select) {
+        this.select = select;
     }
 
     public int getUniqueId() {

@@ -1,6 +1,6 @@
 package com.moulay.krepehouse.Controllers;
 
-import com.moulay.krepehouse.HelloApplication;
+import com.moulay.krepehouse.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,7 +26,7 @@ public class HelloController implements Initializable {
 
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/moulay/krepehouse/FoodView/mainView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/moulay/krepehouse/MenuView/mainView.fxml"));
             BorderPane temp = fxmlLoader.load();
             foodTab.setContent(temp);
         } catch (IOException e) {
@@ -41,7 +41,7 @@ public class HelloController implements Initializable {
     private void OnFoodTabAction(){
         deleteContent(foodTab);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/moulay/krepehouse/FoodView/mainView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/moulay/krepehouse/FoodView/mainView.fxml"));
             BorderPane temp = fxmlLoader.load();
             foodTab.setContent(temp);
         } catch (IOException e) {
@@ -53,7 +53,7 @@ public class HelloController implements Initializable {
     private void OnVendorTabAction(){
         deleteContent(vendorTab);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/moulay/krepehouse/VendorView/mainView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/moulay/krepehouse/VendorView/mainView.fxml"));
             BorderPane temp = fxmlLoader.load();
             vendorTab.setContent(temp);
         } catch (IOException e) {
@@ -65,7 +65,7 @@ public class HelloController implements Initializable {
     private void OnMenuTabAction(){
         deleteContent(menuTab);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/moulay/krepehouse/MenuView/mainView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/moulay/krepehouse/MenuView/mainView.fxml"));
             BorderPane temp = fxmlLoader.load();
             menuTab.setContent(temp);
         } catch (IOException e) {

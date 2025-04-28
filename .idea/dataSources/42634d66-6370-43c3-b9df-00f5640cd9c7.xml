@@ -1145,7 +1145,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
     </schema>
     <schema id="325" parent="1" name="crepehouse">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-04-23.09:29:48</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-04-28.16:09:54</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_general_ci</CollationName>
     </schema>
     <schema id="326" parent="1" name="mysql">
@@ -1461,83 +1461,92 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="389" parent="338" name="DATE">
-      <DasType>date|0s</DasType>
+    <column id="389" parent="338" name="SELECTED">
+      <DasType>tinyint(1)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="390" parent="338" name="CREATE_AT">
-      <DasType>timestamp|0s</DasType>
-      <DefaultExpression>current_timestamp()</DefaultExpression>
-      <NotNull>1</NotNull>
+    <column id="390" parent="338" name="NAME">
+      <DasType>varchar(200)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="391" parent="338" name="UPDATE_AT">
-      <DasType>timestamp|0s</DasType>
-      <DefaultExpression>current_timestamp()</DefaultExpression>
+    <column id="391" parent="338" name="DATE">
+      <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <index id="392" parent="338" name="PRIMARY">
+    <column id="392" parent="338" name="CREATE_AT">
+      <DasType>timestamp|0s</DasType>
+      <DefaultExpression>current_timestamp()</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="393" parent="338" name="UPDATE_AT">
+      <DasType>timestamp|0s</DasType>
+      <DefaultExpression>current_timestamp()</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <index id="394" parent="338" name="PRIMARY">
       <ColNames>UniqueID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="393" parent="338" name="PRIMARY">
+    <key id="395" parent="338" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="394" parent="339" name="UniqueID">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="396" parent="339" name="UniqueID">
+      <AutoIncrement>5</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="395" parent="339" name="NAME">
+    <column id="397" parent="339" name="NAME">
       <DasType>varchar(300)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="396" parent="339" name="PHONE">
+    <column id="398" parent="339" name="PHONE">
       <DasType>varchar(20)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="397" parent="339" name="USERNAME">
+    <column id="399" parent="339" name="USERNAME">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="398" parent="339" name="PASSWORD">
+    <column id="400" parent="339" name="PASSWORD">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="399" parent="339" name="ARCHIVE">
+    <column id="401" parent="339" name="ARCHIVE">
       <Comment>0 = NON ARCIVE / 1 = ARCHIVE</Comment>
       <DasType>int(11)|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="400" parent="339" name="CREATE_AT">
+    <column id="402" parent="339" name="CREATE_AT">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>current_timestamp()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="401" parent="339" name="UPDATE_AT">
+    <column id="403" parent="339" name="UPDATE_AT">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>current_timestamp()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <index id="402" parent="339" name="PRIMARY">
+    <index id="404" parent="339" name="PRIMARY">
       <ColNames>UniqueID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="403" parent="339" name="PRIMARY">
+    <key id="405" parent="339" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

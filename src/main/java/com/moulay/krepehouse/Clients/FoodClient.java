@@ -5,6 +5,7 @@ import com.moulay.krepehouse.BddPackage.VendorOperation;
 import com.moulay.krepehouse.Models.SimpleFood;
 import com.moulay.krepehouse.Models.Vendor;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -32,39 +33,37 @@ public class FoodClient implements Runnable{
     public void run() {
         try {
             // Initialize streams
-            oos = new ObjectOutputStream(clientSocket.getOutputStream());
             ois = new ObjectInputStream(clientSocket.getInputStream());
+            oos = new ObjectOutputStream(clientSocket.getOutputStream());
 
-            // Receive request from client
-            String request = (String) ois.readObject();
-            System.out.println("Received request: " + request);
+            // Create and send response
+            ArrayList<SimpleFood> list = operation.getAllFoodByMenuSelected();
+//            Vendor vendor = operation.isExistLogin(clientVendor);
+            oos.writeObject(list);
+            oos.flush();
 
+            // Receive object from client
+            /*Object received = ois.readObject();
+            if (received instanceof SimpleFood) {
+                SimpleFood clientVendor = (SimpleFood) received;
+                System.out.println("Received from client: " + clientVendor);
 
-            if (request.equals("get")){
+            }*/
 
-                // Create sample food list
-                List<SimpleFood> foodList = operation.getAllFoodByMenuSelected();
-
-                // Create and send response
-                oos.writeObject(foodList);
-                oos.flush();
-
-                // Wait for client acknowledgment if needed
-                try {
-//                    clientSocket.setSoTimeout(5000); // 5-second timeout
-                    Object ack = ois.readObject(); // Wait for client acknowledgment
-                } catch (SocketTimeoutException e) {
-                    System.out.println("Client didn't acknowledge, but data was sent");
-                }
-            }
-
-
-
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             log("Error with client connection: " + e.getMessage());
             e.printStackTrace();
         } finally {
             closeResources();
+        }
+    }
+
+    private void writeNullableString(DataOutputStream dos, String value) throws IOException {
+        if (value != null) {
+            dos.writeBoolean(true);
+            dos.writeUTF(value);
+        } else {
+            dos.writeBoolean(false);
         }
     }
 

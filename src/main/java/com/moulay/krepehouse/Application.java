@@ -36,8 +36,8 @@ public class Application extends javafx.application.Application {
         stage.setScene(scene);
         stage.show();
 
-        startLoginServer();
-        startFoodServer();
+//        startLoginServer();
+//        startFoodServer();
 
     }
 
@@ -132,11 +132,6 @@ public class Application extends javafx.application.Application {
                         Socket clientSocket = serverFoodSocket.accept();
                         log("New client connected: " + clientSocket.getInetAddress());
 
-                        // Configure socket
-                        clientSocket.setSoTimeout(TIMEOUT);
-                        clientSocket.setReceiveBufferSize(BUFFER_SIZE);
-                        clientSocket.setSendBufferSize(BUFFER_SIZE);
-                        clientSocket.setTcpNoDelay(true);
 
                         // Create new client handler and process in thread pool
                         FoodClient clientHandler = new FoodClient(clientSocket);
@@ -174,6 +169,8 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        launch();
+
+
+        launch(args);
     }
 }

@@ -10,16 +10,15 @@ public class SimpleFood implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-    private int uniqueId;
-    private String nameAr;
-    private String nameFr;
-    private float Price;
-    private String description;
-    private byte[]  picture;
-    private int archive;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    private  int uniqueId;
+    private  String nameAr;
+    private  String nameFr;
+    private  float Price;
+    private  String description;
+    private  byte[]  picture;
+    private  int archive;
+    private transient LocalDateTime createAt;
+    private transient LocalDateTime updateAt;
 
     public SimpleFood() {
     }
@@ -143,4 +142,5 @@ public class SimpleFood implements Serializable {
                 ", updateAt=" + updateAt +
                 '}';
     }
+
 }

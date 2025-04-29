@@ -38,11 +38,13 @@ public class LoginClient implements Runnable{
                 oos.flush();
             }
 
+//            closeResources();
+
         } catch (IOException | ClassNotFoundException e) {
             log("Error with client connection: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            closeResources();
+//            closeResources();
         }
     }
 

@@ -8,14 +8,14 @@ public class Vendor implements Serializable {
     // Add this line to explicitly define serialVersionUID
     private static final long serialVersionUID = 1L;  // Can be any long value
 
-    private int uniqueId;
-    private String name;
-    private String phone;
-    private String username;
-    private String password;
-    private int archive;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    private transient int uniqueId;
+    private transient String name;
+    private transient String phone;
+    private transient String username;
+    private transient String password;
+    private transient int archive;
+    private transient LocalDateTime createAt;
+    private transient LocalDateTime updateAt;
 
     public Vendor() {
     }

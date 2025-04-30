@@ -1,6 +1,7 @@
 package com.moulay.krepehouse.Controllers;
 
 import com.moulay.krepehouse.Application;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,14 +21,19 @@ public class HelloController implements Initializable {
     Tab foodTab, vendorTab,menuTab;
 
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         vendorTab.setContent(new TextField());
 
+        System.out.println("server is start");
+//        statusLabel.setText("Spring Boot: RUNNING");
+
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/moulay/krepehouse/MenuView/mainView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/moulay/krepehouse/FoodView/mainView.fxml"));
             BorderPane temp = fxmlLoader.load();
             foodTab.setContent(temp);
         } catch (IOException e) {

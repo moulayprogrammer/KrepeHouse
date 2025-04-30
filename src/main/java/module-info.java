@@ -15,7 +15,6 @@ module com.moulay.krepehouse {
     requires javafx.swing;
 
 
-//
     opens com.moulay.krepehouse to javafx.fxml;
     exports com.moulay.krepehouse;
 

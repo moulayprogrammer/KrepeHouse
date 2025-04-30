@@ -2,6 +2,7 @@ package com.moulay.krepehouse;
 
 import com.moulay.krepehouse.Clients.FoodClient;
 import com.moulay.krepehouse.Clients.LoginClient;
+import com.moulay.krepehouse.Controllers.HelloController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -26,11 +27,14 @@ public class Application extends javafx.application.Application {
     private ExecutorService clientFoodThreadPool = Executors.newCachedThreadPool();
     private ExecutorService serverFoodThread = Executors.newSingleThreadExecutor();
 
+    HelloController controller;
+
     @Override
     public void start(Stage stage) throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/moulay/krepehouse/hello-view.fxml"));
+        controller = fxmlLoader.getController();
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -102,10 +106,10 @@ public class Application extends javafx.application.Application {
 
     @Override
     public void stop() {
-        stopLoginServer();
+        /*stopLoginServer();
         stopFoodServer();
         serverLoginThread.shutdownNow();
-        serverFoodThread.shutdownNow();
+        serverFoodThread.shutdownNow();*/
     }
 
     /*end login server */

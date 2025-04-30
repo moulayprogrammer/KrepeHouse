@@ -40,7 +40,7 @@ public class Application extends javafx.application.Application {
         stage.setScene(scene);
         stage.show();
 
-//        startLoginServer();
+        startLoginServer();
 //        startFoodServer();
 
     }

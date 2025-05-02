@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<DialogPane expanded="true" nodeOrientation="RIGHT_TO_LEFT" prefWidth="450.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.moulay.krepehouse.Controllers.VendorControllers.AddController">
+<DialogPane expanded="true" nodeOrientation="RIGHT_TO_LEFT" prefWidth="450.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.VendorControllers.AddController">
    <header>
       <AnchorPane prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top" BorderPane.alignment="CENTER">
          <children>
@@ -53,6 +53,20 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </TextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="21.0" layoutY="56.0">
+                     <children>
+                        <Label prefWidth="100.0" styleClass="font-hs-dream" text="تاريخ الدخول" textFill="#2d8b9a">
+                           <font>
+                              <Font name="HSDream-Regular" size="15.0" />
+                           </font>
+                        </Label>
+                        <DatePicker maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </DatePicker>
                      </children>
                   </HBox>
                   <HBox>

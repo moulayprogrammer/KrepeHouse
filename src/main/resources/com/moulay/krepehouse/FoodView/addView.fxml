@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<DialogPane expanded="true" nodeOrientation="RIGHT_TO_LEFT" prefWidth="450.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.moulay.krepehouse.Controllers.FoodControllers.AddController">
+<DialogPane expanded="true" nodeOrientation="RIGHT_TO_LEFT" prefWidth="450.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.FoodControllers.AddController">
    <header>
       <AnchorPane prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top" BorderPane.alignment="CENTER">
          <children>
@@ -87,12 +87,12 @@
                               </ImageView>
                               <VBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#OnAddPicture" prefWidth="100.0" styleClass="add-picture-food" text="إضافة صورة" textFill="WHITE">
+                                    <Button mnemonicParsing="false" onAction="#OnAddPicture" prefWidth="100.0" styleClass="confirm-button" text="إضافة صورة" textFill="WHITE">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#OnDeletePicture" prefWidth="100.0" styleClass="remove-picture-food" text="حذف صورة" textFill="WHITE">
+                                    <Button mnemonicParsing="false" onAction="#OnDeletePicture" prefWidth="100.0" styleClass="cancel-button" text="حذف صورة" textFill="WHITE">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -117,12 +117,13 @@
                </padding>
                <VBox.margin>
                   <Insets bottom="5.0" top="10.0" />
-               </VBox.margin></Label>
+               </VBox.margin>
+            </Label>
             <HBox spacing="10.0">
                <children>
                   <HBox HBox.hgrow="ALWAYS">
                      <children>
-                        <Button maxHeight="26.0" maxWidth="1.7976931348623157E308" minHeight="26.0" mnemonicParsing="false" onAction="#OnSaveStay" prefHeight="26.0" styleClass="save-button-small" text="حفظ و بقاء" textFill="WHITE">
+                        <Button maxHeight="26.0" maxWidth="1.7976931348623157E308" minHeight="26.0" mnemonicParsing="false" onAction="#OnSaveStay" prefHeight="26.0" styleClass="info-button" text="حفظ و بقاء" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -135,7 +136,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button fx:id="btnInsert" maxHeight="26.0" maxWidth="65.0" minHeight="26.0" minWidth="65.0" mnemonicParsing="false" onAction="#OnSave" prefHeight="26.0" prefWidth="65.0" styleClass="save-button-small" text="حفظ" textFill="WHITE">
+                  <Button fx:id="btnInsert" maxHeight="26.0" maxWidth="65.0" minHeight="26.0" minWidth="65.0" mnemonicParsing="false" onAction="#OnSave" prefHeight="26.0" prefWidth="65.0" styleClass="confirm-button" text="حفظ" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -146,7 +147,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="CHECK_SQUARE" size="14.0" />
                      </graphic>
                   </Button>
-                  <Button maxHeight="26.0" maxWidth="70.0" minHeight="26.0" minWidth="70.0" mnemonicParsing="false" onAction="#OnClose" prefHeight="26.0" prefWidth="70.0" styleClass="cancle-button-small" text="إلغاء" textFill="WHITE">
+                  <Button maxHeight="26.0" maxWidth="70.0" minHeight="26.0" minWidth="70.0" mnemonicParsing="false" onAction="#OnClose" prefHeight="26.0" prefWidth="70.0" styleClass="cancel-button" text="إلغاء" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>

@@ -3,10 +3,7 @@ package com.moulay.krepehouse.BddPackage;
 import com.moulay.krepehouse.Models.Food;
 import com.moulay.krepehouse.Models.Vendor;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -16,13 +13,14 @@ public class VendorOperation extends BDD<Vendor>{
     public boolean insert(Vendor o) {
         connectDatabase();
         boolean ins = false;
-        String query = "INSERT INTO `vendor`( `NAME`, `PHONE`, `USERNAME`, `PASSWORD` ) VALUES (?,?,?,?) ;";
+        String query = "INSERT INTO `vendor`( `NAME`, `PHONE`, `DATE_JOINED`, `USERNAME`, `PASSWORD` ) VALUES (?,?,?,?,?) ;";
         try {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1,o.getName());
             preparedStmt.setString(2,o.getPhone());
-            preparedStmt.setString(3,o.getUsername());
-            preparedStmt.setString(4,o.getPassword());
+            preparedStmt.setDate(3, Date.valueOf(o.getDateJoined()));
+            preparedStmt.setString(4,o.getUsername());
+            preparedStmt.setString(5,o.getPassword());
 
             int insert = preparedStmt.executeUpdate();
             if(insert != -1) ins = true;
@@ -36,13 +34,14 @@ public class VendorOperation extends BDD<Vendor>{
     public int insertId(Vendor o) {
         connectDatabase();
         int ins = 0;
-        String query = "INSERT INTO `vendor`( `NAME`, `PHONE`, `USERNAME`, `PASSWORD` ) VALUES (?,?,?,?) ;";
+        String query = "INSERT INTO `vendor`( `NAME`, `PHONE`, `DATE_JOINED`, `USERNAME`, `PASSWORD` ) VALUES (?,?,?,?,?) ;";
         try {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1,o.getName());
             preparedStmt.setString(2,o.getPhone());
-            preparedStmt.setString(3,o.getUsername());
-            preparedStmt.setString(4,o.getPassword());
+            preparedStmt.setDate(3, Date.valueOf(o.getDateJoined()));
+            preparedStmt.setString(4,o.getUsername());
+            preparedStmt.setString(5,o.getPassword());
 
             int insert = preparedStmt.executeUpdate();
             if(insert != -1) ins = preparedStmt.getGeneratedKeys().getInt(1);
@@ -58,15 +57,16 @@ public class VendorOperation extends BDD<Vendor>{
     public boolean update(Vendor o1, Vendor o2) {
         connectDatabase();
         boolean upd = false;
-        String query = "UPDATE `vendor` SET `NAME`= ?, `PHONE`= ?, `USERNAME`= ?, `PASSWORD`= ?, `UPDATE_AT`= ? WHERE `UniqueID`= ?";
+        String query = "UPDATE `vendor` SET `NAME`= ?, `PHONE`= ?, `DATE_JOINED` = ?, `USERNAME`= ?, `PASSWORD`= ?, `UPDATE_AT`= ? WHERE `UniqueID`= ?";
         try {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1,o1.getName());
             preparedStmt.setString(2,o1.getPhone());
-            preparedStmt.setString(3,o1.getUsername());
-            preparedStmt.setString(4,o1.getPassword());
-            preparedStmt.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
-            preparedStmt.setInt(6,o2.getUniqueId());
+            preparedStmt.setDate(3,Date.valueOf(o1.getDateJoined()));
+            preparedStmt.setString(4,o1.getUsername());
+            preparedStmt.setString(5,o1.getPassword());
+            preparedStmt.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStmt.setInt(7,o2.getUniqueId());
 
             int update = preparedStmt.executeUpdate();
             if(update != -1) upd = true;
@@ -114,6 +114,7 @@ public class VendorOperation extends BDD<Vendor>{
                 vendor.setUniqueId(resultSet.getInt("UniqueID"));
                 vendor.setName(resultSet.getString("NAME"));
                 vendor.setPhone(resultSet.getString("PHONE"));
+                vendor.setDateJoined(resultSet.getDate("DATE_JOINED").toLocalDate());
                 vendor.setUsername(resultSet.getString("USERNAME"));
                 vendor.setPassword(resultSet.getString("PASSWORD"));
                 vendor.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
@@ -142,6 +143,7 @@ public class VendorOperation extends BDD<Vendor>{
                 vendor.setUniqueId(resultSet.getInt("UniqueID"));
                 vendor.setName(resultSet.getString("NAME"));
                 vendor.setPhone(resultSet.getString("PHONE"));
+                vendor.setDateJoined(resultSet.getDate("DATE_JOINED").toLocalDate());
                 vendor.setUsername(resultSet.getString("USERNAME"));
                 vendor.setPassword(resultSet.getString("PASSWORD"));
                 vendor.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
@@ -168,6 +170,7 @@ public class VendorOperation extends BDD<Vendor>{
                 vendor.setUniqueId(resultSet.getInt("UniqueID"));
                 vendor.setName(resultSet.getString("NAME"));
                 vendor.setPhone(resultSet.getString("PHONE"));
+                vendor.setDateJoined(resultSet.getDate("DATE_JOINED").toLocalDate());
                 vendor.setUsername(resultSet.getString("USERNAME"));
                 vendor.setPassword(resultSet.getString("PASSWORD"));
                 vendor.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
@@ -233,6 +236,7 @@ public class VendorOperation extends BDD<Vendor>{
                 vendor.setUniqueId(resultSet.getInt("UniqueID"));
                 vendor.setName(resultSet.getString("NAME"));
                 vendor.setPhone(resultSet.getString("PHONE"));
+                vendor.setDateJoined(resultSet.getDate("DATE_JOINED").toLocalDate());
                 vendor.setUsername(resultSet.getString("USERNAME"));
                 vendor.setPassword(resultSet.getString("PASSWORD"));
                 vendor.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());

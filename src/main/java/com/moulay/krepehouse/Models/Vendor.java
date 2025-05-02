@@ -1,6 +1,7 @@
 package com.moulay.krepehouse.Models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Vendor implements Serializable {
@@ -11,6 +12,7 @@ public class Vendor implements Serializable {
     private transient int uniqueId;
     private transient String name;
     private transient String phone;
+    private transient LocalDate dateJoined;
     private transient String username;
     private transient String password;
     private transient int archive;
@@ -38,6 +40,14 @@ public class Vendor implements Serializable {
         this.password = password;
     }
 
+    public Vendor(String name, String phone, LocalDate dateJoined, String username, String password) {
+        this.name = name;
+        this.phone = phone;
+        this.dateJoined = dateJoined;
+        this.username = username;
+        this.password = password;
+    }
+
     public int getUniqueId() {
         return uniqueId;
     }
@@ -60,6 +70,14 @@ public class Vendor implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public LocalDate getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDateJoined(LocalDate dateJoined) {
+        this.dateJoined = dateJoined;
     }
 
     public String getUsername() {

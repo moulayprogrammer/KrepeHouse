@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.*?>
 
-
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="720.0" prefWidth="960.0" stylesheets="@css/style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.moulay.krepehouse.Controllers.HelloController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="720.0" prefWidth="960.0" style="-fx-background-color: #FFF;" stylesheets="@css/style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.MainController">
     <tabs>
-        <Tab onSelectionChanged="#OnFoodTabAction" fx:id="foodTab" text="الوجبات">
+        <Tab fx:id="foodTab" onSelectionChanged="#OnFoodTabAction" text="الوجبات">
             <content>
             </content>
         </Tab>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #171717;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.moulay.krepehouse.Controllers.LoginController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="412.0" fitWidth="267.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/login_image.jpeg" />
+               </image></ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="335.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="92.0" layoutX="137.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/lock.png" />
+               </image></ImageView>
+            <Label layoutX="32.0" layoutY="155.0" text="اسم المستخدم" textFill="#ffc900">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="211.0" text="كلمة المرور" textFill="#ffc900">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfUser" layoutX="146.0" layoutY="158.0" promptText="Username" />
+            <PasswordField fx:id="pfPass" layoutX="146.0" layoutY="214.0" promptText="Password" />
+            <Button onAction="#ActionLogin" layoutX="146.0" layoutY="281.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #ffc900;" text="Log In" />
+            <Label fx:id="lbAlert" layoutX="153.0" layoutY="127.0" textFill="RED" />
+            <Label layoutX="145.0" onMouseClicked="#ActionAnnular" layoutY="332.0" prefHeight="20.0" prefWidth="42.0" text="الغـــــــاء" textFill="#ffc900">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <!--<Label fx:id="lbAlert" layoutX="10.0" layoutY="328.0" maxWidth="1.7976931348623157E308" opacity="0.0" style="-fx-font-size: 14; -fx-background-color: #f0ad4e; -fx-border-color: #eea236; -fx-border-width: 2; -fx-background-radius: 5; -fx-border-radius: 5;" textFill="WHITE" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="3.0" left="5.0" right="3.0" top="3.0" />
+               </padding>
+            </Label>-->
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

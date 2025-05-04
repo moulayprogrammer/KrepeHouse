@@ -123,84 +123,8 @@
 |root||remote_user||grant option|G
 |root||root|127.0.0.1|grant option|G
 |root||root|::1|grant option|G
-|root||root|localhost|grant option|G
-phpmyadmin|schema||pma|localhost|DELETE|G
-phpmyadmin|schema||pma|localhost|INSERT|G
-phpmyadmin|schema||pma|localhost|SELECT|G
-phpmyadmin|schema||pma|localhost|UPDATE|G
-remote\\_user|schema||remote_user||ALTER|G
-remote\\_user|schema||remote_user||ALTER ROUTINE|G
-remote\\_user|schema||remote_user||CREATE|G
-remote\\_user|schema||remote_user||CREATE ROUTINE|G
-remote\\_user|schema||remote_user||CREATE TEMPORARY TABLES|G
-remote\\_user|schema||remote_user||CREATE VIEW|G
-remote\\_user|schema||remote_user||DELETE|G
-remote\\_user|schema||remote_user||DELETE HISTORY|G
-remote\\_user|schema||remote_user||DROP|G
-remote\\_user|schema||remote_user||EVENT|G
-remote\\_user|schema||remote_user||EXECUTE|G
-remote\\_user|schema||remote_user||INDEX|G
-remote\\_user|schema||remote_user||INSERT|G
-remote\\_user|schema||remote_user||LOCK TABLES|G
-remote\\_user|schema||remote_user||REFERENCES|G
-remote\\_user|schema||remote_user||SELECT|G
-remote\\_user|schema||remote_user||SHOW VIEW|G
-remote\\_user|schema||remote_user||TRIGGER|G
-remote\\_user|schema||remote_user||UPDATE|G
-remote\\_user\\_%|schema||remote_user||ALTER|G
-remote\\_user\\_%|schema||remote_user||ALTER ROUTINE|G
-remote\\_user\\_%|schema||remote_user||CREATE|G
-remote\\_user\\_%|schema||remote_user||CREATE ROUTINE|G
-remote\\_user\\_%|schema||remote_user||CREATE TEMPORARY TABLES|G
-remote\\_user\\_%|schema||remote_user||CREATE VIEW|G
-remote\\_user\\_%|schema||remote_user||DELETE|G
-remote\\_user\\_%|schema||remote_user||DELETE HISTORY|G
-remote\\_user\\_%|schema||remote_user||DROP|G
-remote\\_user\\_%|schema||remote_user||EVENT|G
-remote\\_user\\_%|schema||remote_user||EXECUTE|G
-remote\\_user\\_%|schema||remote_user||INDEX|G
-remote\\_user\\_%|schema||remote_user||INSERT|G
-remote\\_user\\_%|schema||remote_user||LOCK TABLES|G
-remote\\_user\\_%|schema||remote_user||REFERENCES|G
-remote\\_user\\_%|schema||remote_user||SELECT|G
-remote\\_user\\_%|schema||remote_user||SHOW VIEW|G
-remote\\_user\\_%|schema||remote_user||TRIGGER|G
-remote\\_user\\_%|schema||remote_user||UPDATE|G
-test|schema||&apos;&apos;||ALTER|G
-test|schema||&apos;&apos;||CREATE|G
-test|schema||&apos;&apos;||CREATE ROUTINE|G
-test|schema||&apos;&apos;||CREATE TEMPORARY TABLES|G
-test|schema||&apos;&apos;||CREATE VIEW|G
-test|schema||&apos;&apos;||DELETE|G
-test|schema||&apos;&apos;||DELETE HISTORY|G
-test|schema||&apos;&apos;||DROP|G
-test|schema||&apos;&apos;||EVENT|G
-test|schema||&apos;&apos;||INDEX|G
-test|schema||&apos;&apos;||INSERT|G
-test|schema||&apos;&apos;||LOCK TABLES|G
-test|schema||&apos;&apos;||REFERENCES|G
-test|schema||&apos;&apos;||SELECT|G
-test|schema||&apos;&apos;||SHOW VIEW|G
-test|schema||&apos;&apos;||TRIGGER|G
-test|schema||&apos;&apos;||UPDATE|G
-test\\_%|schema||&apos;&apos;||ALTER|G
-test\\_%|schema||&apos;&apos;||CREATE|G
-test\\_%|schema||&apos;&apos;||CREATE ROUTINE|G
-test\\_%|schema||&apos;&apos;||CREATE TEMPORARY TABLES|G
-test\\_%|schema||&apos;&apos;||CREATE VIEW|G
-test\\_%|schema||&apos;&apos;||DELETE|G
-test\\_%|schema||&apos;&apos;||DELETE HISTORY|G
-test\\_%|schema||&apos;&apos;||DROP|G
-test\\_%|schema||&apos;&apos;||EVENT|G
-test\\_%|schema||&apos;&apos;||INDEX|G
-test\\_%|schema||&apos;&apos;||INSERT|G
-test\\_%|schema||&apos;&apos;||LOCK TABLES|G
-test\\_%|schema||&apos;&apos;||REFERENCES|G
-test\\_%|schema||&apos;&apos;||SELECT|G
-test\\_%|schema||&apos;&apos;||SHOW VIEW|G
-test\\_%|schema||&apos;&apos;||TRIGGER|G
-test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
-      <ServerVersion>10.4.32</ServerVersion>
+|root||root|localhost|grant option|G</Grants>
+      <ServerVersion>10.4.14</ServerVersion>
     </root>
     <collation id="2" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
@@ -1210,7 +1134,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
     </collation>
     <schema id="324" parent="1" name="crepehouse">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-05-02.01:30:07</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-05-04.20:19:13</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_general_ci</CollationName>
     </schema>
     <schema id="325" parent="1" name="information_schema">
@@ -1343,20 +1267,17 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="356" parent="337" name="UniqueID">
-      <AutoIncrement>10</AutoIncrement>
+      <AutoIncrement>15</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="357" parent="337" name="NAME_AR">
-      <DasType>varchar(100)|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="357" parent="337" name="name_ar">
+      <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
-      <CollationName>utf8_general_ci</CollationName>
     </column>
-    <column id="358" parent="337" name="NAME_FR">
-      <DasType>varchar(100)|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="358" parent="337" name="name_fr">
+      <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
     </column>
     <column id="359" parent="337" name="PRICE">
@@ -1364,11 +1285,11 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="360" parent="337" name="DESCRIPTION">
-      <DasType>varchar(1000)|0s</DasType>
+    <column id="360" parent="337" name="description">
+      <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="361" parent="337" name="PICTURE">
+    <column id="361" parent="337" name="picture">
       <DasType>longblob|0s</DasType>
       <Position>6</Position>
     </column>
@@ -1472,7 +1393,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="380" parent="339" name="UniqueID">
-      <AutoIncrement>13</AutoIncrement>
+      <AutoIncrement>21</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1499,146 +1420,156 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <index id="385" parent="339" name="PRIMARY">
+    <foreign-key id="385" parent="339" name="food_menu_ibfk_2">
+      <ColNames>UniqueID_MENU</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>UniqueID</RefColNames>
+      <RefTableName>menu</RefTableName>
+    </foreign-key>
+    <foreign-key id="386" parent="339" name="food_menu_ibfk_1">
+      <ColNames>UniqueID_FOOD</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>UniqueID</RefColNames>
+      <RefTableName>food</RefTableName>
+    </foreign-key>
+    <index id="387" parent="339" name="PRIMARY">
       <ColNames>UniqueID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="386" parent="339" name="UniqueID_MENU">
+    <index id="388" parent="339" name="UniqueID_MENU">
       <ColNames>UniqueID_MENU</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="387" parent="339" name="UniqueID_FOOD">
+    <index id="389" parent="339" name="UniqueID_FOOD">
       <ColNames>UniqueID_FOOD</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="388" parent="339" name="PRIMARY">
+    <key id="390" parent="339" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="389" parent="340" name="UniqueID">
+    <column id="391" parent="340" name="UniqueID">
       <AutoIncrement>6</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="390" parent="340" name="SELECTED">
+    <column id="392" parent="340" name="SELECTED">
       <DasType>tinyint(1)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="391" parent="340" name="NAME">
+    <column id="393" parent="340" name="NAME">
       <DasType>varchar(200)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="392" parent="340" name="DATE">
+    <column id="394" parent="340" name="DATE">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="393" parent="340" name="CREATE_AT">
+    <column id="395" parent="340" name="CREATE_AT">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>current_timestamp()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="394" parent="340" name="UPDATE_AT">
+    <column id="396" parent="340" name="UPDATE_AT">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>current_timestamp()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <index id="395" parent="340" name="PRIMARY">
+    <index id="397" parent="340" name="PRIMARY">
       <ColNames>UniqueID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="396" parent="340" name="PRIMARY">
+    <key id="398" parent="340" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="397" parent="341" name="UniqueID">
+    <column id="399" parent="341" name="UniqueID">
       <AutoIncrement>2</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="398" parent="341" name="USERNAME">
+    <column id="400" parent="341" name="USERNAME">
       <DasType>varchar(200)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="399" parent="341" name="PASSWORD">
+    <column id="401" parent="341" name="PASSWORD">
       <DasType>varchar(200)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <index id="400" parent="341" name="PRIMARY">
+    <index id="402" parent="341" name="PRIMARY">
       <ColNames>UniqueID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="401" parent="341" name="PRIMARY">
+    <key id="403" parent="341" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="402" parent="342" name="UniqueID">
+    <column id="404" parent="342" name="UniqueID">
       <AutoIncrement>5</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="403" parent="342" name="NAME">
+    <column id="405" parent="342" name="NAME">
       <DasType>varchar(300)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="404" parent="342" name="PHONE">
+    <column id="406" parent="342" name="PHONE">
       <DasType>varchar(20)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="405" parent="342" name="DATE_JOINED">
-      <DasType>date|0s</DasType>
+    <column id="407" parent="342" name="USERNAME">
+      <DasType>varchar(50)|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="406" parent="342" name="USERNAME">
+    <column id="408" parent="342" name="PASSWORD">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="407" parent="342" name="PASSWORD">
-      <DasType>varchar(50)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>6</Position>
-    </column>
-    <column id="408" parent="342" name="ARCHIVE">
+    <column id="409" parent="342" name="ARCHIVE">
       <Comment>0 = NON ARCIVE / 1 = ARCHIVE</Comment>
       <DasType>int(11)|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="410" parent="342" name="CREATE_AT">
+      <DasType>timestamp|0s</DasType>
+      <DefaultExpression>current_timestamp()</DefaultExpression>
+      <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="409" parent="342" name="CREATE_AT">
+    <column id="411" parent="342" name="UPDATE_AT">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>current_timestamp()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="410" parent="342" name="UPDATE_AT">
-      <DasType>timestamp|0s</DasType>
-      <DefaultExpression>current_timestamp()</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>9</Position>
-    </column>
-    <index id="411" parent="342" name="PRIMARY">
+    <index id="412" parent="342" name="PRIMARY">
       <ColNames>UniqueID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="412" parent="342" name="PRIMARY">
+    <key id="413" parent="342" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

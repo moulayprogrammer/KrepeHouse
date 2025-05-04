@@ -17,5 +17,10 @@
             <content>
             </content>
         </Tab>
+
+        <Tab fx:id="billTab" onSelectionChanged="#OnBillTabAction" text="البيع">
+            <content>
+            </content>
+        </Tab>
     </tabs>
 </TabPane>

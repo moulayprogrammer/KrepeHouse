@@ -24,7 +24,7 @@ public class MainController implements Initializable {
 
 
     @FXML
-    Tab foodTab, vendorTab,menuTab;
+    Tab foodTab, vendorTab,menuTab,billTab;
 
     private ServerSocket serverLoginSocket;
     private boolean isLoginRunning = false;
@@ -89,18 +89,39 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    private void OnBillTabAction(){
+        deleteContent(billTab);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/moulay/krepehouse/BillView/mainView.fxml"));
+            BorderPane temp = fxmlLoader.load();
+            billTab.setContent(temp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void deleteContent(Tab tab){
         if (tab == foodTab){
             if (vendorTab != null) vendorTab.setContent(null);
             if (menuTab != null) menuTab.setContent(null);
+            if (billTab != null) billTab.setContent(null);
         }
         if (tab == vendorTab){
             foodTab.setContent(null);
             if (menuTab != null) menuTab.setContent(null);
+            if (billTab != null) billTab.setContent(null);
+
         }
         if (tab == menuTab){
             foodTab.setContent(null);
             if (vendorTab != null) vendorTab.setContent(null);
+            if (billTab != null) billTab.setContent(null);
+        }
+        if (tab == billTab){
+            foodTab.setContent(null);
+            if (vendorTab != null) vendorTab.setContent(null);
+            if (menuTab != null) menuTab.setContent(null);
         }
 
     }

@@ -2,7 +2,7 @@ package com.moulay.krepehouse.Controllers;
 
 import com.moulay.krepehouse.Application;
 
-import com.moulay.krepehouse.Clients.LoginClient;
+import com.moulay.krepehouse.Clients.BillPrintClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -144,7 +144,7 @@ public class MainController implements Initializable {
                         log("New client connected: " + clientSocket.getInetAddress());
 
                         // Create new client handler and process in thread pool
-                        LoginClient clientHandler = new LoginClient(clientSocket);
+                        BillPrintClient clientHandler = new BillPrintClient(clientSocket);
                         clientLoginThreadPool.execute(clientHandler);
                     } catch (IOException e) {
                         if (isLoginRunning) {

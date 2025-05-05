@@ -240,7 +240,6 @@ public class AddController implements Initializable {
             }else {
                 labelAlert("حدث خطـــأ");
             }*/
-
         }else {
             labelAlert("من فضلك املأ كل الحقول الأساسية");
         }

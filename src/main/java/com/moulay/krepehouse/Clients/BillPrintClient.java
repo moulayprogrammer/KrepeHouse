@@ -6,41 +6,31 @@ import com.moulay.krepehouse.Models.Vendor;
 import java.io.*;
 import java.net.Socket;
 
-public class LoginClient implements Runnable{
+public class BillPrintClient implements Runnable{
 
-    private final Socket clientSocket;
+    private final Socket billPrintSocket;
     ObjectInputStream ois;
     ObjectOutputStream oos;
-    private final VendorOperation operation = new VendorOperation();
 
 
-    public LoginClient(Socket socket) throws IOException {
-        this.clientSocket = socket;
+    public BillPrintClient(Socket socket) throws IOException {
+        this.billPrintSocket = socket;
     }
-
 
     @Override
     public void run() {
         try {
             // Initialize streams
-            ois = new ObjectInputStream(clientSocket.getInputStream());
-            oos = new ObjectOutputStream(clientSocket.getOutputStream());
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(billPrintSocket.getInputStream())
+            );
 
-            // Receive object from client
-            Object received = ois.readObject();
-            if (received instanceof Vendor) {
-                Vendor clientVendor = (Vendor) received;
-                System.out.println("Received from client: " + clientVendor);
+            String msg = in.readLine();
+            System.out.println("Received from client: " + msg);
 
-                // Create and send response
-                Vendor vendor = operation.isExistLogin(clientVendor);
-                oos.writeObject(vendor);
-                oos.flush();
-            }
+            closeResources();
 
-//            closeResources();
-
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             log("Error with client connection: " + e.getMessage());
             e.printStackTrace();
         } finally {
@@ -58,7 +48,7 @@ public class LoginClient implements Runnable{
         try {
             if (ois != null) ois.close();
             if (oos != null) oos.close();
-            if (clientSocket != null) clientSocket.close();
+            if (billPrintSocket != null) billPrintSocket.close();
         } catch (IOException e) {
            log("Error closing client resources: " + e.getMessage());
         }

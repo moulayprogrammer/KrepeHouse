@@ -14,90 +14,160 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.BillControllers.MainController">
+<BorderPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.BillControllers.MainController">
+   <left>
+      <AnchorPane styleClass="container" BorderPane.alignment="CENTER" />
+   </left>
    <top>
-      <AnchorPane styleClass="container" BorderPane.alignment="CENTER">
+      <HBox spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="51.2" layoutY="144.8" maxHeight="1.7976931348623157E308" prefHeight="505.0" prefWidth="899.0" style="-fx-background-color: FFF;" styleClass="container-table" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="145.0">
+            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#OnAdd" styleClass="button-with-icon" text="إضافة" textFill="WHITE" wrapText="true" HBox.hgrow="NEVER">
+               <font>
+                  <Font name="HSDream-Regular" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20" styleClass=".add-new-item-icon" text="" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#OnUpdate" styleClass="button-with-icon" text="تعديل" textFill="WHITE">
+               <font>
+                  <Font name="HSDream-Regular" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="20" styleClass="add-new-item" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#OnDelete" styleClass="button-with-icon" text="حذف" textFill="WHITE">
+               <font>
+                  <Font name="HSDream-Regular" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="20" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="button-with-icon" text="طباعة" textFill="WHITE">
+               <font>
+                  <Font name="HSDream-Regular" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="20" styleClass="button-with-icon" text="" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="button-with-icon" text="استخراج" textFill="WHITE">
+               <font>
+                  <Font name="HSDream-Regular" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="FILE" size="20" text="" />
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: FFF;" styleClass="container-table" BorderPane.alignment="CENTER">
+         <children>
+            <HBox spacing="10.0">
                <children>
-                  <AnchorPane maxHeight="1.7976931348623157E308" prefHeight="489.0" prefWidth="858.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <TableView fx:id="table" onMouseClicked="#tableClick" prefWidth="837.0" styleClass="table" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                          <columns>
-                            <TableColumn fx:id="clId" prefWidth="100.0" styleClass="column-table" text="#" />
-                              <TableColumn fx:id="clName" prefWidth="304.0" styleClass="column-table" text="الاسم" />
-                              <TableColumn fx:id="clDate" prefWidth="283.0" styleClass="column-table" text="التاريخ" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-                  <HBox alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="626.0" VBox.vgrow="NEVER">
-                     <children>
-                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="30.0" prefWidth="70.0" styleClass="button-with-icon" text="الغاء" textAlignment="RIGHT" textFill="#828282" HBox.hgrow="NEVER">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" size="15.0" />
-                           </graphic>
-                        </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="30.0" prefWidth="70.0" styleClass="button-with-icon" text="تأكيد" textFill="#828282">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" />
-                           </graphic>
-                        </Button>
-                        <Label alignment="CENTER" disable="true" prefHeight="50.0" prefWidth="310.0" text="1000" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-                           <font>
-                              <Font name="HSDream-Regular" size="26.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="300.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="40.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </VBox>
-            <HBox layoutX="51.2" layoutY="122.4" prefHeight="52.0" prefWidth="898.0" spacing="10.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="50.0">
-               <children>
-                  <HBox prefHeight="66.0" prefWidth="899.0" spacing="10.0" styleClass="hbox" HBox.hgrow="NEVER">
-                     <children>
-                        <TextField fx:id="tfRecherche" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="700.0" promptText="بحث" style="-fx-font-family: HSDream-Regular;" styleClass="input" HBox.hgrow="NEVER">
-                           <font>
-                              <Font name="HSDream-Regular" size="15.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="40.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="32.0" prefWidth="60.0" styleClass="button-with-icon" textFill="#828282">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15.0" />
-                           </graphic>
-                        </Button>
-                     </children>
-                     <HBox.margin>
+                  <Label styleClass="number-of-list" text="العدد" textFill="#777777">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNumber" styleClass="number-list" text="2513" textFill="#777777">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                     <opaqueInsets>
                         <Insets />
-                     </HBox.margin>
+                     </opaqueInsets>
+                  </Label>
+                  <TextField fx:id="tfRecherche" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="600.0" promptText="بحث" style="-fx-font-family: HSDream-Regular;" styleClass="input">
+                     <font>
+                        <Font name="HSDream-Regular" size="15.0" />
+                     </font>
+                  </TextField>
+                  <Button mnemonicParsing="false" onAction="#ActionSearch" prefHeight="32.0" prefWidth="65.0" styleClass="button-with-icon" textFill="#828282">
                      <cursor>
-                        <Cursor fx:constant="DEFAULT" />
+                        <Cursor fx:constant="HAND" />
                      </cursor>
-                     <padding>
-                        <Insets left="10.0" right="10.0" top="20.0" />
-                     </padding>
-                  </HBox>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15.0" text="" />
+                     </graphic>
+                  </Button>
                </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <TableView fx:id="table" onMouseClicked="#tableClick" prefWidth="837.0" styleClass="table">
+              <columns>
+                <TableColumn fx:id="clId" prefWidth="100.0" styleClass="column-table" text="#" />
+                  <TableColumn fx:id="clName" prefWidth="304.0" styleClass="column-table" text="الاسم" />
+                  <TableColumn fx:id="clDate" prefWidth="283.0" styleClass="column-table" text="التاريخ" />
+              </columns>
+            </TableView>
+            <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="30.0" prefWidth="70.0" styleClass="button-with-icon" text="الغاء" textAlignment="RIGHT" textFill="#828282">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" size="15.0" />
+               </graphic>
+            </Button>
+            <HBox alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="626.0" VBox.vgrow="NEVER">
+               <children>
+                  <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="30.0" prefWidth="70.0" styleClass="button-with-icon" text="الغاء" textAlignment="RIGHT" textFill="#828282" HBox.hgrow="NEVER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" size="15.0" />
+                     </graphic>
+                  </Button>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="30.0" prefWidth="70.0" styleClass="button-with-icon" text="تأكيد" textFill="#828282">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" />
+                     </graphic>
+                  </Button>
+                  <Label alignment="CENTER" disable="true" prefHeight="50.0" prefWidth="310.0" text="1000" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="HSDream-Regular" size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="300.0" />
+               </VBox.margin>
             </HBox>
          </children>
-      </AnchorPane>
-   </top>
+         <padding>
+            <Insets bottom="10.0" left="48.0" right="48.0" />
+         </padding>
+      </VBox>
+   </center>
 </BorderPane>

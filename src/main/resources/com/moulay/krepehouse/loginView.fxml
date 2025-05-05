@@ -18,7 +18,7 @@
                <image>
                   <Image url="@Images/login_image.jpeg" />
                </image></ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="120.0">
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="145.0">
                <image>
                   <Image url="@Images/one_crepe_light_bg.png" />
                </image>
@@ -29,21 +29,13 @@
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="335.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="32.0" layoutY="155.0" text="اسم المستخدم" textFill="#3f5d4a">
+            <TextField fx:id="tfUser" layoutX="69.0" layoutY="129.0" prefHeight="33.0" prefWidth="200.0" promptText="اسم المستخدم" styleClass="input" />
+            <PasswordField fx:id="pfPass" layoutX="69.0" layoutY="185.0" prefHeight="33.0" prefWidth="200.0" promptText="كلمة المرور" styleClass="input" />
+            <Button layoutX="127.0" layoutY="243.0" mnemonicParsing="false" onAction="#ActionLogin" prefHeight="33.0" prefWidth="90.0" style="-fx-background-color: #3f5d4a;" styleClass="button-with-icon" text="Login" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="35.0" layoutY="211.0" text="كلمة المرور" textFill="#3f5d4a">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tfUser" layoutX="146.0" layoutY="158.0" promptText="Username" />
-            <PasswordField fx:id="pfPass" layoutX="146.0" layoutY="214.0" promptText="Password" />
-            <Button layoutX="146.0" layoutY="281.0" mnemonicParsing="false" onAction="#ActionLogin" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #3f5d4a;" styleClass="confirm-button" text="Log In" textFill="WHITE" />
-            <Label fx:id="lbAlert" layoutX="153.0" layoutY="127.0" textFill="RED" />
-            <Label layoutX="145.0" layoutY="332.0" onMouseClicked="#ActionAnnular" prefHeight="20.0" prefWidth="42.0" text="الغـــــــاء" textFill="#ffc900">
+                  <Font name="HSDream-Regular" size="10.0" />
+               </font></Button>
+            <Label layoutX="151.0" layoutY="293.0" onMouseClicked="#ActionAnnular" prefHeight="20.0" prefWidth="42.0" text="الغـــــــاء" textFill="#717171">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

@@ -18,7 +18,7 @@ abstract class BDD<Object> {
         String url = "jdbc:mariadb://localhost:3306/crepehouse" ;
 
         String user = "root";
-        String password = "";
+        String password = "123456";
         String unicode= "?useUnicode=yes&characterEncoding=UTF-8";
 
         try {

@@ -4,20 +4,17 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Vendor implements Serializable {
+public class Vendor {
 
-    // Add this line to explicitly define serialVersionUID
-    private static final long serialVersionUID = 1L;  // Can be any long value
-
-    private transient int uniqueId;
-    private transient String name;
-    private transient String phone;
-    private transient LocalDate dateJoined;
-    private transient String username;
-    private transient String password;
-    private transient int archive;
-    private transient LocalDateTime createAt;
-    private transient LocalDateTime updateAt;
+    private int uniqueId;
+    private String name;
+    private String phone;
+    private LocalDate dateJoined;
+    private String username;
+    private String password;
+    private int archive;
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
 
     public Vendor() {
     }

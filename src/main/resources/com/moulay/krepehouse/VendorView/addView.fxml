@@ -32,7 +32,7 @@
    <content>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: FFF;" styleClass="container" BorderPane.alignment="CENTER">
          <children>
-            <VBox spacing="10.0" styleClass="container-table">
+            <VBox spacing="10.0" styleClass="input">
                <children>
                   <HBox>
                      <children>

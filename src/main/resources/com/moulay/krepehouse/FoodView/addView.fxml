@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<DialogPane expanded="true" nodeOrientation="RIGHT_TO_LEFT" prefWidth="450.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.FoodControllers.AddController">
+<DialogPane expanded="true" nodeOrientation="RIGHT_TO_LEFT" prefWidth="450.0" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.FoodControllers.AddController">
    <header>
       <AnchorPane prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="55.0" layoutY="27.0" styleClass="font-hs-dream" text="إضافة وجبة/مشروب" textFill="#777777" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+            <Label layoutX="55.0" layoutY="27.0" styleClass="font-hs-dream" text="إضافة وجبة/مشروب" textFill="#3f5d4a" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
                <font>
-                  <Font size="22.0" />
+                  <Font size="26.0" />
                </font>
             </Label>
          </children>
@@ -28,57 +36,57 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <VBox spacing="10.0" styleClass="container-table" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="408.0" prefWidth="430.0" spacing="10.0" styleClass="input">
                      <children>
-                        <HBox prefHeight="40.0">
-                           <children>
-                              <Label prefWidth="100.0" styleClass="font-hs-dream" text="الاسم بالعربية" textFill="#2d8b9a">
-                                 <font>
-                                    <Font name="HSDream-Regular" size="15.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="tfNameAr" maxWidth="1.7976931348623157E308" promptText="ادخل الاسم بالعرربية" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                        </HBox>
-                        <HBox layoutX="21.0" layoutY="21.0" prefHeight="40.0">
-                           <children>
-                              <Label prefWidth="100.0" styleClass="font-hs-dream" text="الاسم بالفرنسية" textFill="#2d8b9a">
-                                 <font>
-                                    <Font name="HSDream-Regular" size="15.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="tfNameFr" maxWidth="1.7976931348623157E308" promptText="ادخل الاسم بالفرنسية" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                        </HBox>
                         <HBox>
                            <children>
-                              <Label prefWidth="100.0" styleClass="font-hs-dream" text="السعر" textFill="#2d8b9a">
+                              <Label prefWidth="100.0" styleClass="font-hs-dream" text="الاسم بالعربية" textFill="#3f5d4a">
                                  <font>
                                     <Font name="HSDream-Regular" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tfPrice" maxWidth="1.7976931348623157E308" promptText="ادخل السعر" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="tfNameAr" prefHeight="33.0" promptText="ادخل الاسم بالعرربية" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
                         </HBox>
-                        <Label styleClass="font-hs-dream" text="الوصف (ليس مطلوب)" textFill="#2d8b9a">
+                        <HBox layoutX="21.0" layoutY="21.0" maxHeight="-Infinity">
+                           <children>
+                              <Label prefWidth="100.0" styleClass="font-hs-dream" text="الاسم بالفرنسية" textFill="#3f5d4a">
+                                 <font>
+                                    <Font name="HSDream-Regular" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfNameFr" prefHeight="33.0" promptText="ادخل الاسم بالفرنسية" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox maxHeight="-Infinity">
+                           <children>
+                              <Label prefWidth="100.0" styleClass="font-hs-dream" text="السعر" textFill="#3f5d4a">
+                                 <font>
+                                    <Font name="HSDream-Regular" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfPrice" prefHeight="33.0" promptText="ادخل السعر" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <Label styleClass="font-hs-dream" text="الوصف (ليس مطلوب)" textFill="#3f5d4a">
                            <font>
                               <Font name="HSDream-Regular" size="15.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="taDesc" minHeight="-Infinity" prefHeight="120.0" promptText="اكتب وصف الوجبة او المكونات" />
-                        <HBox fillHeight="false" spacing="20.0" styleClass="container-table">
+                        <TextArea fx:id="taDesc" minHeight="-Infinity" prefHeight="120.0" promptText="اكتب وصف الوجبة او المكونات" styleClass="input" />
+                        <HBox fillHeight="false" spacing="20.0" styleClass="input">
                            <children>
                               <ImageView fx:id="ivPicture" fitHeight="60.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -123,7 +131,7 @@
                <children>
                   <HBox HBox.hgrow="ALWAYS">
                      <children>
-                        <Button maxHeight="26.0" maxWidth="1.7976931348623157E308" minHeight="26.0" mnemonicParsing="false" onAction="#OnSaveStay" prefHeight="26.0" styleClass="info-button" text="حفظ و بقاء" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#OnSaveStay" prefHeight="33.0" prefWidth="101.0" styleClass="button-with-icon" text="حفظ و بقاء" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -136,20 +144,9 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button fx:id="btnInsert" maxHeight="26.0" maxWidth="65.0" minHeight="26.0" minWidth="65.0" mnemonicParsing="false" onAction="#OnSave" prefHeight="26.0" prefWidth="65.0" styleClass="confirm-button" text="حفظ" textFill="WHITE">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
+                  <Button mnemonicParsing="false" onAction="#OnClose" prefHeight="33.0" prefWidth="80.0" styleClass="cancel-button" text="إلغاء" textFill="WHITE">
                      <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK_SQUARE" size="14.0" />
-                     </graphic>
-                  </Button>
-                  <Button maxHeight="26.0" maxWidth="70.0" minHeight="26.0" minWidth="70.0" mnemonicParsing="false" onAction="#OnClose" prefHeight="26.0" prefWidth="70.0" styleClass="cancel-button" text="إلغاء" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
+                        <Font size="16.0" />
                      </font>
                      <padding>
                         <Insets right="10.0" />
@@ -159,6 +156,17 @@
                      </cursor>
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" size="14.0" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#OnSave" prefHeight="33.0" prefWidth="80.0" styleClass="confirm-button" text="حفظ" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK_SQUARE" size="14.0" />
                      </graphic>
                   </Button>
                </children>

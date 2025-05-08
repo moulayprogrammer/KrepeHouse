@@ -60,7 +60,7 @@ public class LoginController implements Initializable {
                 TabPane temp = loader.load();
                 Scene scene = new Scene(temp);
                 stage.setScene(scene);
-                stage.setMaximized(true);
+//                stage.setMaximized(true);
 //                stage.getIcons().add(new Image("Icons/logo.png"));
                 stage.show();
             } catch (IOException e) {

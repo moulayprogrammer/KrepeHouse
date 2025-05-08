@@ -1,5 +1,6 @@
 package com.moulay.krepehouse.Controllers.BillControllers;
 
+import com.moulay.krepehouse.BddPackage.BillOperation;
 import com.moulay.krepehouse.BddPackage.FoodMenuOperation;
 import com.moulay.krepehouse.BddPackage.FoodOperation;
 import com.moulay.krepehouse.BddPackage.MenuOperation;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -18,6 +20,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,23 +33,24 @@ import java.util.ResourceBundle;
 
 public class AddController implements Initializable {
 
-
     @FXML
-    TableView<Food> tableFood,tableMenu;
+    ScrollPane scroll;
     @FXML
-    TableColumn<Food,Integer> clIdFood;
+    GridPane gridFood;
     @FXML
-    TableColumn<Food,String> clNameArFood,clNameFrFood,clNameArMenu;
+    TableView<Food> tableMenu;
     @FXML
-    TableColumn<Food, Image> clPictureFood,clPictureMenu;
+    TableColumn<Food,String> clNameArMenu;
     @FXML
-    TextField tfRechercheFood,tfName;
+    TableColumn<Food, Image> clPictureMenu;
+    @FXML
+    TextField tfRechercheFood;
     @FXML
     DatePicker dpDate;
     @FXML
     Button btnInsert;
 
-    private final MenuOperation operation = new MenuOperation();
+    private final BillOperation operation = new BillOperation();
     private final FoodMenuOperation foodMenuOperation = new FoodMenuOperation();
     private final FoodOperation foodOperation = new FoodOperation();
 
@@ -53,12 +59,12 @@ public class AddController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        dpDate.setValue(LocalDate.now());
+//        dpDate.setValue(LocalDate.now());
 
-        tableFood.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        tableFood.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableMenu.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        clIdFood.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
+       /* clIdFood.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
         clNameArFood.setCellValueFactory(new PropertyValueFactory<>("nameAr"));
         clNameFrFood.setCellValueFactory(new PropertyValueFactory<>("nameFr"));
         clPictureFood.setCellValueFactory(new PropertyValueFactory<>("picture"));
@@ -83,7 +89,7 @@ public class AddController implements Initializable {
                     setGraphic(imageView);
                 }
             }
-        });
+        });*/
 
         clNameArMenu.setCellValueFactory(new PropertyValueFactory<>("nameAr"));
         clPictureMenu.setCellValueFactory(new PropertyValueFactory<>("picture"));
@@ -122,7 +128,7 @@ public class AddController implements Initializable {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(temp);
             dialog.resizableProperty().setValue(false);
-            dialog.initOwner(this.tableFood.getScene().getWindow());
+            dialog.initOwner(this.tfRechercheFood.getScene().getWindow());
             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
             Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
             closeButton.setVisible(false);
@@ -145,7 +151,7 @@ public class AddController implements Initializable {
     }
     @FXML
     private void ActionAddToMenu(){
-        try {
+        /*try {
 
             ObservableList<Food> selectedItems = tableFood.getSelectionModel().getSelectedItems();
 
@@ -168,12 +174,12 @@ public class AddController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
     private void ActionDeleteFromMenu(){
-        try {
+        /*try {
 
             ObservableList<Food> selectedItems = tableMenu.getSelectionModel().getSelectedItems();
 
@@ -197,7 +203,7 @@ public class AddController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
@@ -207,20 +213,62 @@ public class AddController implements Initializable {
     }
 
     private void refreshTableFood(){
-        System.out.println("refresh food");
-        ArrayList<Food> foods = foodOperation.getAll();
-        ObservableList<Food> foodObservableList = FXCollections.observableArrayList();
+
+        try {
+
+            System.out.println("refresh food");
+            ArrayList<Food> foods = foodOperation.getAll();
+
+            int col = 0;
+            int row = 0;
+
+            for (int i = 0; i < foods.size(); i++) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/BillView/itemlCard.fxml"));
+                    AnchorPane temp = loader.load();
+                    ItemController controller = loader.getController();
+                    controller.Init(foods.get(i));
+
+                    if (col == 3 ) {
+                        col = 0;
+                        row++;
+                    }
+
+                    gridFood.add(temp,col++,row);
+
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            foods.forEach(food -> {
+
+
+            });
+
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        /*ObservableList<Food> foodObservableList = FXCollections.observableArrayList();
         foodObservableList.setAll(foods);
 
         foodObservableList.removeAll(tableMenu.getItems());
 
-        tableFood.setItems(foodObservableList );
+        tableFood.setItems(foodObservableList );*/
     }
 
     @FXML
     private void OnSave(){
 
-        String name = tfName.getText().trim();
+       /* String name = tfName.getText().trim();
         LocalDate date = dpDate.getValue();
 
         if ( !name.isEmpty() && date != null && !tableMenu.getItems().isEmpty()){
@@ -234,15 +282,9 @@ public class AddController implements Initializable {
             });
 
             closeDialog(btnInsert);
-            /*boolean ins = insert(food);
-            if (ins){
-                closeDialog(btnInsert);
-            }else {
-                labelAlert("حدث خطـــأ");
-            }*/
         }else {
             labelAlert("من فضلك املأ كل الحقول الأساسية");
-        }
+        }*/
     }
 
     private void labelAlert(String st){

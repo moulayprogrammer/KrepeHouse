@@ -13,6 +13,8 @@ module com.moulay.krepehouse {
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.desktop;
     requires javafx.swing;
+    requires jasperreports;
+    requires org.slf4j;
 
 
     opens com.moulay.krepehouse to javafx.fxml;

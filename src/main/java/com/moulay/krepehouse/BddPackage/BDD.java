@@ -53,6 +53,9 @@ abstract class BDD<Object> {
         }
     }
 
+    public Connection getConn() {
+        return conn;
+    }
 
     abstract public boolean insert(Object o);
     //o1 new value

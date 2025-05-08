@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.BillControllers.ItemController">
    <children>
-      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <HBox alignment="CENTER" layoutX="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="120.0" prefWidth="320.0" spacing="10.0" styleClass="container-order-food" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label prefHeight="30.0" prefWidth="106.0" text="كريب بنان">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" text="Crepe Bana">
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font></Label>
-             <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="120.00" textAlignment="CENTER" textFill="#c72020" VBox.vgrow="ALWAYS">
-               <font>
-                  <Font name="HSDream-Regular" size="20.0" />
-               </font></Label>
+            <ImageView fx:id="ivPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lbNameAr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="كريب بنان" textAlignment="RIGHT" wrapText="true" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="HSDream-Regular" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lbNameFr" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="Crepe Bana" textAlignment="RIGHT" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                   <Label fx:id="lbPrice" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="120.00" textAlignment="CENTER" textFill="#c72020">
+                     <font>
+                        <Font name="HSDream-Regular" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
    </children>
-</HBox>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</AnchorPane>

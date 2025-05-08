@@ -1,6 +1,8 @@
 package com.moulay.krepehouse.Controllers.BillControllers;
 
+import com.moulay.krepehouse.BddPackage.BillOperation;
 import com.moulay.krepehouse.BddPackage.MenuOperation;
+import com.moulay.krepehouse.Models.Bill;
 import com.moulay.krepehouse.Models.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +18,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.awt.print.PrinterJob;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -32,24 +40,24 @@ public class MainController implements Initializable {
     private TextField tfRecherche;
 
     @FXML
-    TableView<Menu> table;
+    TableView<Bill> table;
     @FXML
-    TableColumn<Menu,Integer> clId;
+    TableColumn<Bill,Integer> clNumber;
     @FXML
-    TableColumn<Menu,String> clName;
+    TableColumn<Bill,Double> clTotal;
     @FXML
-    TableColumn<Menu, LocalDate> clDate;
+    TableColumn<Bill, LocalDate> clDate;
 
 
-    private final MenuOperation operation = new MenuOperation();
+    private final BillOperation operation = new BillOperation();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
-        clName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        clNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+        clTotal.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
         clDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         tfRecherche.textProperty().addListener((observableValue, s, t1) -> {
@@ -63,7 +71,7 @@ public class MainController implements Initializable {
     @FXML
     private void OnAdd(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/MenuView/addView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/BillView/addView.fxml"));
             DialogPane temp = loader.load();
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(temp);
@@ -83,9 +91,9 @@ public class MainController implements Initializable {
 
     @FXML
     private void OnUpdate() {
-        try {
+        /*try {
 
-            Menu selectedMenu = table.getSelectionModel().getSelectedItem();
+            Bill selectedMenu = table.getSelectionModel().getSelectedItem();
 
             if (selectedMenu != null) {
                 try {
@@ -118,13 +126,13 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
     private void OnDelete(ActionEvent actionEvent) {
 
-        try {
+        /*try {
 
              Menu selectedMenu = table.getSelectionModel().getSelectedItem();
 
@@ -147,12 +155,12 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
     void ActionSearch() {
-        try {
+        /*try {
             // filtrer les données
             ObservableList<Menu> dataFacture = table.getItems();
             FilteredList<Menu> filteredData = new FilteredList<>(dataFacture, e -> true);
@@ -174,7 +182,7 @@ public class MainController implements Initializable {
 
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
@@ -189,12 +197,77 @@ public class MainController implements Initializable {
     }
 
     private void refresh(){
-        ArrayList<Menu> menus = operation.getAll();
-        ObservableList<Menu> menuObservableList = FXCollections.observableArrayList();
-        menuObservableList.addAll(menus);
-        table.setItems(menuObservableList );
+        ArrayList<Bill> bills = operation.getAll();
+        ObservableList<Bill> billObservableList = FXCollections.observableArrayList();
+        billObservableList.addAll(bills);
+        table.setItems(billObservableList );
 
-//        lbNumber.setText(String.valueOf(menus.size()));
+        lbNumber.setText(String.valueOf(bills.size()));
+    }
+
+    @FXML
+    private void OnPrint(){
+
+        try {
+
+            Bill selectedBill = table.getSelectionModel().getSelectedItem();
+
+            if (selectedBill != null) {
+                try {
+
+                    String path = System.getProperty("user.dir")+"/src/main/resources/com/moulay/krepehouse/Jasper/Invoice1.jrxml";
+                    JasperDesign design = JRXmlLoader.load(path);
+
+                    if (operation.getConn().isClosed()) operation.connectDatabase();
+
+                    String sql = "SELECT\n" +
+                            "    b.NUMBER AS Number,\n" +
+                            "    b.DATE AS Date,\n" +
+                            "    f.name_ar AS NameAr,\n" +
+                            "    fb.QTE AS Qte,\n" +
+                            "    f.PRICE AS Price,\n" +
+                            "    fb.TOTAL_PRICE AS FoodTotal,\n" +
+                            "    b.TOTAL_PRICE AS BillTotal\n" +
+                            "FROM bill AS b\n" +
+                            "INNER JOIN food_bill AS fb \n" +
+                            "    ON b.UniqueID = fb.UniqueID_BILL\n" +
+                            "INNER JOIN food AS f \n" +
+                            "    ON fb.UniqueID_FOOD = f.UniqueID\n" +
+                            "WHERE b.UniqueID = "+selectedBill.getUniqueId() ;
+
+                    JRDesignQuery designQuery = new JRDesignQuery();
+                    designQuery.setText(sql);
+                    design.setQuery(designQuery);
+
+                    JasperReport jasperReport = JasperCompileManager.compileReport(design);
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, operation.getConn());
+
+                    JasperViewer.viewReport(jasperPrint,false);
+
+                    if (!operation.getConn().isClosed()) operation.closeDatabase();
+
+                    // 5. Direct Print
+//                    PrinterJob printerJob = PrinterJob.getPrinterJob();
+//                    JasperPrintManager.printReport(jasperPrint, false);
+                    /*if (printerJob.printDialog()) {
+
+                    }*/
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+                alertWarning.setHeaderText("تحذير");
+                alertWarning.setContentText("من فضلك قم بتحديد ما تريد طباعته");
+                alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
+                Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
+                okButton.setText("موافق");
+                alertWarning.showAndWait();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

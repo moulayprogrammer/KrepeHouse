@@ -222,4 +222,9 @@ public class BillOperation extends BDD<Bill>{
         closeDatabase();
         return list;
     }
+
+    public int getLastNumber() {
+
+        return 0;
+    }
 }

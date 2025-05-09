@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -73,6 +75,10 @@ public class LoginController implements Initializable {
         }
     }
 
+    public void KeyPress(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) ActionLogin();
+    }
+
     private void labelAlert(String st){
 
         try {
@@ -89,5 +95,6 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
 }

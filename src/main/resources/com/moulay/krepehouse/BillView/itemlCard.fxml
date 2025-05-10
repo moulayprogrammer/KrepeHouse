@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -12,7 +13,7 @@
 
 <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="350.0" style="-fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #EEE;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.BillControllers.ItemController">
    <children>
-      <HBox nodeOrientation="RIGHT_TO_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox nodeOrientation="RIGHT_TO_LEFT" styleClass="input" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="ivPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
             <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
@@ -21,7 +22,7 @@
                      <children>
                         <Label fx:id="lbNameAr" maxWidth="1.7976931348623157E308" text="كريب بنان" textAlignment="RIGHT" wrapText="true" VBox.vgrow="ALWAYS">
                            <font>
-                              <Font name="HSDream-Regular" size="16.0" />
+                              <Font name="HSDream-Regular" size="20.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="5.0" />
@@ -39,11 +40,14 @@
                            <children>
                                <Label fx:id="lbPrice" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="120.00" textFill="#c72020" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="HSDream-Regular" size="15.0" />
+                                    <Font name="HSDream-Regular" size="20.0" />
                                  </font>
                               </Label>
-                              <Spinner fx:id="spinner" prefWidth="80.0"  min="1" max="1000" initialValue="1" editable="true"/>
-                              <Button fx:id="btnAdd" mnemonicParsing="false" styleClass="confirm-button" text="إضافة" />
+                              <Spinner fx:id="spinner" editable="true" initialValue="1" max="1000" min="1" prefWidth="80.0" styleClass="input" />
+                              <Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="50.0" styleClass="confirm-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
+                                 </graphic></Button>
                            </children>
                         </HBox>
                      </children>

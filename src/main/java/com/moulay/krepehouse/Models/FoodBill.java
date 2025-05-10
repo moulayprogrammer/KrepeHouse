@@ -15,6 +15,13 @@ public class FoodBill {
     public FoodBill() {
     }
 
+    public FoodBill(int uniqueIdBill, FoodBillTable foodBillTable) {
+        this.uniqueIdBill = uniqueIdBill;
+        this.uniqueIdFood = foodBillTable.getUniqueId();
+        this.qte = foodBillTable.getQte();
+        this.totalPrice = foodBillTable.getPriceTotal();
+    }
+
     public FoodBill(int uniqueId, int uniqueIdBill, int uniqueIdFood, int qte, float totalPrice, LocalDateTime createAt, LocalDateTime updateAt) {
         this.uniqueId = uniqueId;
         this.uniqueIdBill = uniqueIdBill;

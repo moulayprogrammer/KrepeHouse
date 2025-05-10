@@ -35,7 +35,7 @@ public class BillOperation extends BDD<Bill>{
         int ins = 0;
         String query = "INSERT INTO `bill`(`UniqueID_VENDOR`, `NUMBER`, `DATE`, `TIME`, `TOTAL_PRICE`) VALUES (?,?,?,?,?) ;";
         try {
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setInt(1,o.getUniqueIdVendor());
             preparedStmt.setInt(2,o.getNumber());
             preparedStmt.setDate(3, Date.valueOf(o.getDate()));
@@ -43,8 +43,13 @@ public class BillOperation extends BDD<Bill>{
             preparedStmt.setFloat(5,o.getTotalPrice());
 
             int insert = preparedStmt.executeUpdate();
-            if(insert != -1) ins = preparedStmt.getGeneratedKeys().getInt(1);
-
+            if (insert > 0) {
+                try (ResultSet rs = preparedStmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        ins = rs.getInt(1);  // Get the auto-generated ID
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -225,6 +230,21 @@ public class BillOperation extends BDD<Bill>{
 
     public int getLastNumber() {
 
-        return 0;
+        connectDatabase();
+        int n = 0;
+        String query = "SELECT `NUMBER` FROM `bill` ORDER BY `CREATE_AT` DESC LIMIT 1;";
+        try {
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            ResultSet resultSet = preparedStmt.executeQuery();
+            if (resultSet.next()){
+
+                n = resultSet.getInt("NUMBER");
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeDatabase();
+        return n;
     }
 }

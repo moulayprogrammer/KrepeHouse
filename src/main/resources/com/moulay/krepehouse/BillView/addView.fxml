@@ -119,7 +119,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="confirm-button" text="دفع" textFill="#828282">
+                              <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#OnSave" prefHeight="33.0" prefWidth="100.0" styleClass="confirm-button" text="دفع" textFill="#828282">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

@@ -19,6 +19,14 @@ public class Bill {
     public Bill() {
     }
 
+    public Bill(int uniqueIdVendor, int number, LocalDate date, LocalTime time, float totalPrice) {
+        this.uniqueIdVendor = uniqueIdVendor;
+        this.number = number;
+        this.date = date;
+        this.time = time;
+        this.totalPrice = totalPrice;
+    }
+
     public Bill(int uniqueId, int uniqueIdVendor, int number, LocalDate date, LocalTime time, float totalPrice, int archive, LocalDateTime createAt, LocalDateTime updateAt) {
         this.uniqueId = uniqueId;
         this.uniqueIdVendor = uniqueIdVendor;

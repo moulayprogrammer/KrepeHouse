@@ -111,13 +111,13 @@ public class AddController implements Initializable {
 
         try {
 
-            lbAlert.setText(st);
+            /*lbAlert.setText(st);
             FadeTransition ft = new FadeTransition(Duration.millis(2000), lbAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.setCycleCount(2);
             ft.setAutoReverse(true);
-            ft.play();
+            ft.play();*/
 
         }catch (Exception e){
             e.printStackTrace();

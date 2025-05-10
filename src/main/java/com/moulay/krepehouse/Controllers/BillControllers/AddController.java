@@ -1,7 +1,9 @@
 package com.moulay.krepehouse.Controllers.BillControllers;
 
 import com.moulay.krepehouse.BddPackage.*;
+import com.moulay.krepehouse.Models.Bill;
 import com.moulay.krepehouse.Models.Food;
+import com.moulay.krepehouse.Models.FoodBill;
 import com.moulay.krepehouse.Models.FoodBillTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +27,7 @@ import javafx.util.StringConverter;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +66,7 @@ public class AddController implements Initializable {
     float totalBill;
 
     private final BillOperation operation = new BillOperation();
-    private final FoodBillOperation foodMenuOperation = new FoodBillOperation();
+    private final FoodBillOperation foodBillOperation = new FoodBillOperation();
     private final FoodOperation foodOperation = new FoodOperation();
 
 
@@ -158,6 +161,11 @@ public class AddController implements Initializable {
 
     private void setBillNumber(){
         int number = operation.getLastNumber();
+        if (number != 0){
+            tfNumber.setText(String.valueOf(number));
+        }else {
+            tfNumber.setText("1");
+        }
     }
 
     @FXML
@@ -374,23 +382,23 @@ public class AddController implements Initializable {
     @FXML
     private void OnSave(){
 
-       /* String name = tfName.getText().trim();
+        String number = tfNumber.getText().trim();
         LocalDate date = dpDate.getValue();
 
-        if ( !name.isEmpty() && date != null && !tableMenu.getItems().isEmpty()){
+        if ( !number.isEmpty() && date != null && !tableBill.getItems().isEmpty()){
 
-            Menu menu = new Menu(name,date,true);
+            Bill bill = new Bill(2,Integer.parseInt(number),date, LocalTime.now(),totalBill);
 
-            int insert = operation.insertId(menu);
-            tableMenu.getItems().forEach(food -> {
-                FoodMenu foodMenu = new FoodMenu(insert,food.getUniqueId());
-                foodMenuOperation.insert(foodMenu);
+            int insert = operation.insertId(bill);
+            tableBill.getItems().forEach(food -> {
+                FoodBill foodBill = new FoodBill(insert,food);
+                foodBillOperation.insert(foodBill);
             });
 
             closeDialog(btnInsert);
         }else {
             labelAlert("من فضلك املأ كل الحقول الأساسية");
-        }*/
+        }
     }
 
     private void labelAlert(String st){

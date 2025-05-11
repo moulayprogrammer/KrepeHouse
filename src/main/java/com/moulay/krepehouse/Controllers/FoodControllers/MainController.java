@@ -159,8 +159,23 @@ public class MainController implements Initializable {
                 try {
 
                     if (!operation.isExistInBills(selectedFood) && !operation.isExistInMenu(selectedFood)){
-                        operation.delete(selectedFood);
-                        refresh();
+
+                        Alert alertWarning = new Alert(Alert.AlertType.CONFIRMATION);
+                        alertWarning.setHeaderText("الحذف");
+                        alertWarning.setContentText("هل انت متاكد من الحذف النهائي");
+                        alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
+                        Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
+                        okButton.setText("موافق");
+                        okButton.setOnAction(actionEvent1 -> {
+                            operation.delete(selectedFood);
+                            refresh();
+                        });
+                        Button Button = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.CANCEL);
+                        Button.setText("إلغاء");
+                        Button.setOnAction(actionEvent1 -> alertWarning.close());
+                        alertWarning.showAndWait();
+
+
                     }else {
                         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
                         alertWarning.setHeaderText("تحذير");

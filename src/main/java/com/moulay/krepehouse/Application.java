@@ -4,11 +4,13 @@ import com.moulay.krepehouse.Clients.BillPrintClient;
 import com.moulay.krepehouse.Controllers.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,7 +32,8 @@ public class Application extends javafx.application.Application {
         controller = fxmlLoader.getController();
         Scene scene = new Scene(fxmlLoader.load());
 
-//        stage.setTitle("Hello!");
+        stage.setTitle("One Crepe");
+        stage.getIcons().add(new Image(Objects.requireNonNull(Application.class.getResourceAsStream("/com/moulay/krepehouse/Images/one_crepe_light_bg.png"))));
         stage.resizableProperty().setValue(false);
         stage.setScene(scene);
         stage.show();

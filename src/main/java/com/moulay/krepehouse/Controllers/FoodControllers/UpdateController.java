@@ -37,6 +37,7 @@ public class UpdateController implements Initializable {
     private final FoodOperation operation = new FoodOperation();
 
     private Food selectedFood;
+    private boolean changeImage = false;
 
 
     @Override
@@ -94,14 +95,14 @@ public class UpdateController implements Initializable {
 
         try {
 
-            lbAlert.setText(st);
+            /*lbAlert.setText(st);
             FadeTransition ft = new FadeTransition(Duration.millis(2000), lbAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.setCycleCount(2);
             ft.setAutoReverse(true);
             ft.play();
-
+*/
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -110,7 +111,7 @@ public class UpdateController implements Initializable {
     private boolean update(Food food) {
         boolean update = false;
         try {
-            update = operation.update(food,selectedFood);
+            update = operation.update(food,selectedFood,changeImage);
             return update;
         }catch (Exception e){
             e.printStackTrace();
@@ -132,18 +133,20 @@ public class UpdateController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Image File");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
         );
         File imageFile = fileChooser.showOpenDialog( btnUpdate.getScene().getWindow());
 
         if (imageFile != null) {
             Image image = new Image(imageFile.toURI().toString());
             ivPicture.setImage(image);
+            changeImage = true;
         }
     }
 
     @FXML
     public void OnDeletePicture(ActionEvent actionEvent) {
         ivPicture.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/moulay/krepehouse/Images/crepe.jpg"))));
+        changeImage = true;
     }
 }

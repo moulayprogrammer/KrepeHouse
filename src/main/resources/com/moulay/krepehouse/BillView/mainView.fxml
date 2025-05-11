@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.BillControllers.MainController">
-   <left>
-      <AnchorPane styleClass="container" BorderPane.alignment="CENTER" />
-   </left>
+<BorderPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #F8F8F8;" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.BillControllers.MainController">
    <top>
-      <HBox spacing="20.0" BorderPane.alignment="CENTER">
+      <HBox spacing="20.0" styleClass="hbox" BorderPane.alignment="CENTER">
          <children>
             <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#OnAdd" styleClass="button-with-icon" text="إضافة" textFill="WHITE" wrapText="true" HBox.hgrow="NEVER">
                <font>
@@ -43,7 +33,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="20" styleClass="add-new-item" />
                </graphic>
             </Button>
-            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#OnDelete" styleClass="button-with-icon" text="حذف" textFill="WHITE">
+            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#OnDelete" styleClass="button-with-icon" text="إلغاء" textFill="WHITE">
                <font>
                   <Font name="HSDream-Regular" size="16.0" />
                </font>
@@ -83,7 +73,7 @@
       </HBox>
    </top>
    <center>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: FFF;" styleClass="container-table" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: FFF;" styleClass="container-table" BorderPane.alignment="CENTER">
          <children>
             <HBox spacing="10.0">
                <children>
@@ -100,7 +90,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Label>
-                  <TextField fx:id="tfRecherche" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="600.0" promptText="بحث" style="-fx-font-family: HSDream-Regular;" styleClass="input">
+                  <TextField fx:id="tfRecherche" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" minWidth="150.0" prefHeight="32.0" promptText="بحث" style="-fx-font-family: HSDream-Regular;" styleClass="input">
                      <font>
                         <Font name="HSDream-Regular" size="15.0" />
                      </font>
@@ -113,65 +103,56 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15.0" text="" />
                      </graphic>
                   </Button>
+                  <Label styleClass="number-of-list" text="التاريخ من" textFill="#777777">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dpFrom" prefHeight="32.0" prefWidth="120.0" styleClass="input" />
+                  <Label styleClass="number-of-list" text="إلى" textFill="#777777">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dpTo" layoutX="596.0" layoutY="10.0" prefHeight="32.0" prefWidth="120.0" styleClass="input" />
+                  <Button mnemonicParsing="false" onAction="#ActionSearchDate" prefHeight="32.0" prefWidth="65.0" styleClass="button-with-icon" textFill="#828282">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15.0" text="" />
+                     </graphic>
+                  </Button>
                </children>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
-            <TableView fx:id="table" onMouseClicked="#tableClick" prefWidth="837.0" styleClass="table">
+            <TableView fx:id="table" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#tableClick" styleClass="table" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="clNumber" prefWidth="100.0" styleClass="column-table" text="#" />
                   <TableColumn fx:id="clTotal" prefWidth="304.0" styleClass="column-table" text="المبلغ" />
                   <TableColumn fx:id="clDate" prefWidth="283.0" styleClass="column-table" text="التاريخ" />
               </columns>
             </TableView>
-            <Label prefHeight="50.0" />
-            <HBox alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="626.0" VBox.vgrow="NEVER">
+            <HBox alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                <children>
-                  <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="35.0" prefWidth="100.0" styleClass="cancel-button" text="الغاء" textAlignment="RIGHT" textFill="#828282" HBox.hgrow="NEVER">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" size="15.0" />
-                     </graphic>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ActionSearch" prefHeight="35.0" prefWidth="100.0" styleClass="confirm-button" text="تأكيد" textFill="#828282">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15.0" />
-                     </graphic>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="15.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Label fx:id="lbTotalBill" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="300.0" styleClass="total-label" text="9999999,999">
+                  <Label fx:id="lbTotal" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="300.0" styleClass="total-label" text="9999999,999">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets left="300.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
          </children>
          <padding>
-            <Insets bottom="10.0" left="48.0" right="48.0" />
+            <Insets bottom="10.0" left="20.0" right="20.0" />
          </padding>
       </VBox>
    </center>

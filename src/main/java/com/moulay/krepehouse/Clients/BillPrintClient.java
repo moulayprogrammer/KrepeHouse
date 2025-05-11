@@ -2,6 +2,7 @@ package com.moulay.krepehouse.Clients;
 
 import com.moulay.krepehouse.BddPackage.BillOperation;
 import com.moulay.krepehouse.BddPackage.VendorOperation;
+import com.moulay.krepehouse.Controllers.BillControllers.PrintController;
 import com.moulay.krepehouse.Models.Vendor;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
@@ -38,7 +39,11 @@ public class BillPrintClient implements Runnable{
             if (!msg.isEmpty()){
                 System.out.println("Received from client: " + msg);
 
-                String path = System.getProperty("user.dir")+"/src/main/resources/com/moulay/krepehouse/Jasper/Invoice1.jrxml";
+                PrintController printController = new PrintController();
+                printController.printPrepare(Integer.parseInt(msg));
+                printController.directPrint();
+
+                /*String path = System.getProperty("user.dir")+"/src/main/resources/com/moulay/krepehouse/Jasper/Invoice.jrxml";
                 JasperDesign design = JRXmlLoader.load(path);
 
                 String sql = "SELECT\n" +
@@ -64,12 +69,12 @@ public class BillPrintClient implements Runnable{
                 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, operation.getConn());
 
                 // 5. Direct Print
-                JasperPrintManager.printReport(jasperPrint, false);
+                JasperPrintManager.printReport(jasperPrint, false);*/
             }
 
             closeResources();
 
-        } catch (IOException | JRException e) {
+        } catch (IOException e) {
             log("Error with client connection: " + e.getMessage());
             e.printStackTrace();
         } finally {

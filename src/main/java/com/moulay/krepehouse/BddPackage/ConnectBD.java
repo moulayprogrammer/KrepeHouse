@@ -16,7 +16,7 @@ public class ConnectBD {
         String url = "jdbc:mariadb://localhost:3306/crepehouse";
 
         String user = "root";
-        String password = "123456";
+        String password = "";
         String unicode= "?useUnicode=yes&characterEncoding=UTF-8";
 
         try {

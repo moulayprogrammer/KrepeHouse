@@ -1,10 +1,12 @@
 package com.moulay.krepehouse.BddPackage;
 
 import com.moulay.krepehouse.Models.Food;
+import com.moulay.krepehouse.Models.FoodBillTable;
 import com.moulay.krepehouse.Models.SimpleFood;
 import javafx.scene.image.Image;
 import java.awt.image.BufferedImage;
 import javafx.embed.swing.SwingFXUtils;
+import net.coobird.thumbnailator.Thumbnails;
 
 
 import javax.imageio.ImageIO;
@@ -30,7 +32,7 @@ public class FoodOperation extends BDD<Food>{
             preparedStmt.setFloat(3,o.getPrice());
             preparedStmt.setString(4,o.getDescription());
 
-            // Convert JavaFX Image to BufferedImage
+                // Convert JavaFX Image to BufferedImage
             Image fxImage = o.getPicture();
             BufferedImage bImage = SwingFXUtils.fromFXImage(fxImage, null);
 
@@ -39,7 +41,7 @@ public class FoodOperation extends BDD<Food>{
             ImageIO.write(bImage, "png", baos); // use "jpg" if your image is jpg
             byte[] imageBytes = baos.toByteArray();
 
-            preparedStmt.setBytes(5,imageBytes);
+            preparedStmt.setBytes(5,compressJavaFXImage(o.getPicture()));
 
             int insert = preparedStmt.executeUpdate();
             if(insert != -1) ins = true;
@@ -50,6 +52,11 @@ public class FoodOperation extends BDD<Food>{
         }
         closeDatabase();
         return ins;
+    }
+
+    @Override
+    public boolean update(Food o1, Food o2) {
+        return false;
     }
 
     public int insertId(Food o) {
@@ -86,8 +93,7 @@ public class FoodOperation extends BDD<Food>{
         return ins;
     }
 
-    @Override
-    public boolean update(Food o1, Food o2) {
+    public boolean update(Food o1, Food o2, boolean changeImage) {
         connectDatabase();
         boolean upd = false;
         String query = "UPDATE `food` SET `NAME_AR`= ?, `NAME_FR`= ?, `PRICE`= ?, `DESCRIPTION`= ?, `PICTURE`= ?, " +
@@ -99,14 +105,21 @@ public class FoodOperation extends BDD<Food>{
             preparedStmt.setFloat(3,o1.getPrice());
             preparedStmt.setString(4,o1.getDescription());
 
-            // Convert JavaFX Image to BufferedImage
-            Image fxImage = o1.getPicture();
-            BufferedImage bImage = SwingFXUtils.fromFXImage(fxImage, null);
+            byte[] imageBytes;
 
-            // Convert BufferedImage to byte array
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, "png", baos); // use "jpg" if your image is jpg
-            byte[] imageBytes = baos.toByteArray();
+            if (changeImage){
+                imageBytes = compressJavaFXImage(o1.getPicture());
+            }else {
+
+                // Convert JavaFX Image to BufferedImage
+                Image fxImage = o1.getPicture();
+                BufferedImage bImage = SwingFXUtils.fromFXImage(fxImage, null);
+
+                // Convert BufferedImage to byte array
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(bImage, "png", baos); // use "jpg" if your image is jpg
+                imageBytes = baos.toByteArray();
+            }
 
             preparedStmt.setBytes(5,imageBytes);
 
@@ -395,5 +408,55 @@ public class FoodOperation extends BDD<Food>{
         }
         closeDatabase();
         return list;
+    }
+
+    public ArrayList<FoodBillTable> getAllFoodByBill(int idBill) {
+
+        connectDatabase();
+        ArrayList<FoodBillTable> list = new ArrayList<>();
+        String query = "SELECT `food`.`UniqueID` , `food`.`NAME_AR`, `food`.`NAME_FR`, `food`.`PRICE`, `food_bill`.`TOTAL_PRICE`," +
+                " `food_bill`.`QTE` FROM `bill`" +
+                "INNER JOIN food_bill ON bill.UniqueID = food_bill.UniqueID_BILL\n" +
+                "INNER JOIN food ON food_bill.UniqueID_FOOD = food.UniqueID\n" +
+                "WHERE `bill`.`UniqueID` = ?";
+        try {
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setInt(1,idBill);
+            ResultSet resultSet = preparedStmt.executeQuery();
+            while (resultSet.next()){
+
+                FoodBillTable food = new FoodBillTable();
+                food.setUniqueId(resultSet.getInt("UniqueID"));
+                food.setNameAr(resultSet.getString("NAME_AR"));
+                food.setNameFr(resultSet.getString("NAME_FR"));
+                food.setPrice(resultSet.getFloat("PRICE"));
+                food.setPriceTotal(resultSet.getFloat("TOTAL_PRICE"));
+                food.setQte(resultSet.getInt("QTE"));
+
+                list.add(food);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeDatabase();
+        return list;
+    }
+
+    public byte[] compressJavaFXImage(Image javafxImage)
+            throws IOException {
+
+        // Convert JavaFX Image to BufferedImage
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(javafxImage, null);
+
+        // Compress using Thumbnailator and write to byte array
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            Thumbnails.of(bufferedImage)
+                    .size(300, 150)  // Target dimensions
+                    .outputFormat("JPEG")              // Output format (JPEG for lossy compression)
+                    .outputQuality(0.5)            // Quality (0.0-1.0)
+                    .toOutputStream(outputStream);
+
+            return outputStream.toByteArray();
+        }
     }
 }

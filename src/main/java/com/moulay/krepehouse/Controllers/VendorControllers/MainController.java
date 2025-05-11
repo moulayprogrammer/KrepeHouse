@@ -18,15 +18,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class MainController implements Initializable {
 
@@ -38,9 +36,11 @@ public class MainController implements Initializable {
     @FXML
     TableView<Vendor> table;
     @FXML
-    TableColumn<Food,Integer> clId;
+    TableColumn<Vendor,Integer> clId;
     @FXML
-    TableColumn<Food,String> clName,clPhone;
+    TableColumn<Vendor,String> clName,clPhone;
+    @FXML
+    TableColumn<Vendor,LocalDate> clDate;
 
 
     private final VendorOperation operation = new VendorOperation();
@@ -54,13 +54,18 @@ public class MainController implements Initializable {
         clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
         clName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-
-        // Make First Name column editable
-        clName.setCellFactory(TextFieldTableCell.forTableColumn());
-        clName.setOnEditCommit(event -> {
-            System.out.println(event.getNewValue());
-            /*Person person = event.getRowValue();
-            person.setFirstName(event.getNewValue()); // Update the model*/
+        clDate.setCellValueFactory(new PropertyValueFactory<>("dateJoined"));
+        // Set a cell factory with number formatting
+        clDate.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+                }
+            }
         });
 
         tfRecherche.textProperty().addListener((observableValue, s, t1) -> {
@@ -143,8 +148,21 @@ public class MainController implements Initializable {
                 try {
 
                     if (!operation.isExistInBills(selectedVendor)){
-                        operation.delete(selectedVendor);
-                        refresh();
+                        Alert alertWarning = new Alert(Alert.AlertType.CONFIRMATION);
+                        alertWarning.setHeaderText("الحذف");
+                        alertWarning.setContentText("هل انت متاكد من الحذف النهائي");
+                        alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
+                        Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
+                        okButton.setText("موافق");
+                        okButton.setOnAction(actionEvent1 -> {
+                            operation.delete(selectedVendor);
+                            refresh();
+                        });
+                        Button Button = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.CANCEL);
+                        Button.setText("إلغاء");
+                        Button.setOnAction(actionEvent1 -> alertWarning.close());
+                        alertWarning.showAndWait();
+
                     }else {
                         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
                         alertWarning.setHeaderText("تحذير");

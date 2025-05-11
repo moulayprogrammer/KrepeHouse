@@ -1,5 +1,6 @@
 package com.moulay.krepehouse.Controllers;
 
+import com.moulay.krepehouse.Application;
 import com.moulay.krepehouse.BddPackage.UserOperation;
 import com.moulay.krepehouse.Models.User;
 import javafx.animation.FadeTransition;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -16,6 +18,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -62,8 +65,11 @@ public class LoginController implements Initializable {
                 TabPane temp = loader.load();
                 Scene scene = new Scene(temp);
                 stage.setScene(scene);
-//                stage.setMaximized(true);
-//                stage.getIcons().add(new Image("Icons/logo.png"));
+                stage.setMaximized(true);
+                stage.setTitle("One Crepe");
+                stage.setTitle("One Crepe");
+                stage.getIcons().add(new Image(Objects.requireNonNull(LoginController.class
+                        .getResourceAsStream("/com/moulay/krepehouse/Images/one_crepe_light_bg.png"))));
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();

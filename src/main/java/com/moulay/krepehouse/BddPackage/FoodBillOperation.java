@@ -1,5 +1,6 @@
 package com.moulay.krepehouse.BddPackage;
 
+import com.moulay.krepehouse.Models.Bill;
 import com.moulay.krepehouse.Models.FoodBill;
 
 import java.sql.*;
@@ -99,6 +100,23 @@ public class FoodBillOperation extends BDD<FoodBill>{
         connectDatabase();
         boolean del = false;
         String query = "DELETE FROM `food_bill` WHERE `UniqueID`= ?";
+        try {
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setInt(1,o.getUniqueId());
+
+            int delete = preparedStmt.executeUpdate();
+            if(delete != -1) del = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeDatabase();
+        return del;
+    }
+
+    public boolean deleteAllByBill(Bill o) {
+        connectDatabase();
+        boolean del = false;
+        String query = "DELETE FROM `food_bill` WHERE `UniqueID_BILL`= ?";
         try {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt(1,o.getUniqueId());

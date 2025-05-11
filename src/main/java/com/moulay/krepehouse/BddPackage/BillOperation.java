@@ -3,6 +3,7 @@ package com.moulay.krepehouse.BddPackage;
 import com.moulay.krepehouse.Models.Bill;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -246,5 +247,64 @@ public class BillOperation extends BDD<Bill>{
         }
         closeDatabase();
         return n;
+    }
+
+    public ArrayList<Bill> getAllByDate(LocalDate date) {
+        connectDatabase();
+        ArrayList<Bill> list = new ArrayList<>();
+        String query = "SELECT * FROM `bill` WHERE `ARCHIVE`= 0 AND `DATE` = ?;";
+        try {
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setDate(1,Date.valueOf(date));
+            ResultSet resultSet = preparedStmt.executeQuery();
+            while (resultSet.next()){
+
+                Bill bill = new Bill();
+                bill.setUniqueId(resultSet.getInt("UniqueID"));
+                bill.setUniqueIdVendor(resultSet.getInt("UniqueID_VENDOR"));
+                bill.setNumber(resultSet.getInt("NUMBER"));
+                bill.setDate(resultSet.getDate("DATE").toLocalDate());
+                bill.setTime(resultSet.getTime("TIME").toLocalTime());
+                bill.setTotalPrice(resultSet.getFloat("TOTAL_PRICE"));
+                bill.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
+                bill.setUpdateAt(resultSet.getTimestamp("UPDATE_AT").toLocalDateTime());
+
+                list.add(bill);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeDatabase();
+        return list;
+    }
+
+    public ArrayList<Bill> getAllBetweenDate(LocalDate dateFrom, LocalDate dateTo) {
+        connectDatabase();
+        ArrayList<Bill> list = new ArrayList<>();
+        String query = "SELECT * FROM `bill` WHERE `ARCHIVE`= 0 AND `DATE` BETWEEN ? AND ?;";
+        try {
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setDate(1,Date.valueOf(dateFrom));
+            preparedStmt.setDate(2,Date.valueOf(dateTo));
+            ResultSet resultSet = preparedStmt.executeQuery();
+            while (resultSet.next()){
+
+                Bill bill = new Bill();
+                bill.setUniqueId(resultSet.getInt("UniqueID"));
+                bill.setUniqueIdVendor(resultSet.getInt("UniqueID_VENDOR"));
+                bill.setNumber(resultSet.getInt("NUMBER"));
+                bill.setDate(resultSet.getDate("DATE").toLocalDate());
+                bill.setTime(resultSet.getTime("TIME").toLocalTime());
+                bill.setTotalPrice(resultSet.getFloat("TOTAL_PRICE"));
+                bill.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());
+                bill.setUpdateAt(resultSet.getTimestamp("UPDATE_AT").toLocalDateTime());
+
+                list.add(bill);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeDatabase();
+        return list;
     }
 }

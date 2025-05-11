@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="720.0" prefWidth="960.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.BillControllers.AddController">
+<DialogPane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="720.0" prefWidth="960.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.BillControllers.UpdateController">
    <header>
       <AnchorPane maxHeight="70.0" prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top">
          <children>
@@ -127,7 +127,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="confirm-button" text="دفع" textFill="#828282">
+                              <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#OnSave" prefHeight="33.0" prefWidth="100.0" styleClass="confirm-button" text="دفع" textFill="#828282">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

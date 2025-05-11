@@ -15,6 +15,7 @@ module com.moulay.krepehouse {
     requires javafx.swing;
     requires jasperreports;
     requires org.slf4j;
+    requires net.coobird.thumbnailator;
 
 
     opens com.moulay.krepehouse to javafx.fxml;

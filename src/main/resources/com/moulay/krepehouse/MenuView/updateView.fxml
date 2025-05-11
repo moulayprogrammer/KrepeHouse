@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.DialogPane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<DialogPane nodeOrientation="RIGHT_TO_LEFT" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.MenuControllers.AddController">
+<DialogPane nodeOrientation="RIGHT_TO_LEFT" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moulay.krepehouse.Controllers.MenuControllers.UpdateController">
    <header>
       <AnchorPane maxHeight="70.0" prefHeight="60.0" style="-fx-background-color: FFF;" styleClass="bar-top">
          <children>
@@ -145,7 +137,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnInsert" layoutX="129.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnSave" prefHeight="33.0" prefWidth="80.0" styleClass="confirm-button" text="حفظ القائمة" textFill="WHITE">
+                              <Button fx:id="btnUpdate" layoutX="129.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnSave" prefHeight="33.0" prefWidth="80.0" styleClass="confirm-button" text="حفظ القائمة" textFill="WHITE">
                                  <font>
                                     <Font name="HSDream-Regular" size="13.0" />
                                  </font>

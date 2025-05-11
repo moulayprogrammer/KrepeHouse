@@ -62,9 +62,9 @@
             <TableView fx:id="table" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#tableClick" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="clId" prefWidth="100.0" styleClass="column-table" text="#" />
-                  <TableColumn fx:id="clName" editable="false" prefWidth="304.0" styleClass="column-table" text="الاسم" />
-                  <TableColumn fx:id="clPhone" prefWidth="201.2000732421875" styleClass="column-table" text="رقم الهاتف" />
-                  <TableColumn fx:id="clPhone1" prefWidth="365.199951171875" styleClass="column-table" text="تاريخ الدخول" />
+                  <TableColumn fx:id="clName" editable="false" prefWidth="216.0" styleClass="column-table" text="الاسم" />
+                  <TableColumn fx:id="clPhone" prefWidth="160.0" styleClass="column-table" text="رقم الهاتف" />
+                  <TableColumn fx:id="clDate" prefWidth="409.0" styleClass="column-table" text="تاريخ الدخول" />
               </columns>
                <padding>
                   <Insets left="10.0" right="10.0" />

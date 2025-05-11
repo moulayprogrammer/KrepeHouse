@@ -1,9 +1,7 @@
 package com.moulay.krepehouse.Controllers.BillControllers;
 
 import com.moulay.krepehouse.BddPackage.BillOperation;
-import com.moulay.krepehouse.BddPackage.MenuOperation;
 import com.moulay.krepehouse.Models.Bill;
-import com.moulay.krepehouse.Models.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,14 +15,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.design.JRDesignQuery;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
+import javafx.util.StringConverter;
 
-import java.awt.print.PrinterJob;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -35,9 +27,11 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     @FXML
-    private Label lbNumber;
+    private Label lbNumber,lbTotal;
     @FXML
     private TextField tfRecherche;
+    @FXML
+    private DatePicker dpFrom,dpTo;
 
     @FXML
     TableView<Bill> table;
@@ -59,11 +53,52 @@ public class MainController implements Initializable {
         clNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         clTotal.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
         clDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        // Set a cell factory with number formatting
+        clDate.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+                }
+            }
+        });
 
         tfRecherche.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.isEmpty()) ActionSearch();
             else refresh();
         });
+
+        // Set the date format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        dpFrom.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(LocalDate date) {
+                return date != null ? formatter.format(date) : "";
+            }
+            @Override
+            public LocalDate fromString(String string) {
+                return string != null && !string.isEmpty()
+                        ? LocalDate.parse(string, formatter)
+                        : null;
+            }
+        });
+        dpFrom.setValue(LocalDate.now());
+        dpTo.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(LocalDate date) {
+                return date != null ? formatter.format(date) : "";
+            }
+            @Override
+            public LocalDate fromString(String string) {
+                return string != null && !string.isEmpty()
+                        ? LocalDate.parse(string, formatter)
+                        : null;
+            }
+        });
+        dpTo.setValue(LocalDate.now());
 
         refresh();
     }
@@ -91,17 +126,17 @@ public class MainController implements Initializable {
 
     @FXML
     private void OnUpdate() {
-        /*try {
+        try {
 
-            Bill selectedMenu = table.getSelectionModel().getSelectedItem();
+            Bill selectedBill = table.getSelectionModel().getSelectedItem();
 
-            if (selectedMenu != null) {
+            if (selectedBill != null) {
                 try {
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/MenuView/updateView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/moulay/krepehouse/BillView/updateView.fxml"));
                     DialogPane temp = loader.load();
                     UpdateController controller = loader.getController();
-                    controller.Init(selectedMenu);
+                    controller.Init(selectedBill);
                     Dialog<ButtonType> dialog = new Dialog<>();
                     dialog.setDialogPane(temp);
                     dialog.resizableProperty().setValue(false);
@@ -126,20 +161,33 @@ public class MainController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
     private void OnDelete(ActionEvent actionEvent) {
 
-        /*try {
+        try {
 
-             Menu selectedMenu = table.getSelectionModel().getSelectedItem();
+             Bill selectedItem = table.getSelectionModel().getSelectedItem();
 
-            if (selectedMenu != null) {
+            if (selectedItem != null) {
                 try {
-                    operation.delete(selectedMenu);
-                    refresh();
+
+                    Alert alertWarning = new Alert(Alert.AlertType.CONFIRMATION);
+                    alertWarning.setHeaderText("الحذف");
+                    alertWarning.setContentText("هل انت متاكد من الالغاء النهائي");
+                    alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
+                    Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
+                    okButton.setText("موافق");
+                    okButton.setOnAction(actionEvent1 -> {
+                        operation.delete(selectedItem);
+                        refresh();
+                    });
+                    Button Button = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.CANCEL);
+                    Button.setText("إلغاء");
+                    Button.setOnAction(actionEvent1 -> alertWarning.close());
+                    alertWarning.showAndWait();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -149,40 +197,41 @@ public class MainController implements Initializable {
                 alertWarning.setHeaderText("تحذير");
                 alertWarning.setContentText("من فضلك قم بتحديد ما تريد حذفه");
                 alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
-                Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
+                 Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
                 okButton.setText("موافق");
                 alertWarning.showAndWait();
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
     void ActionSearch() {
-        /*try {
+        try {
             // filtrer les données
-            ObservableList<Menu> dataFacture = table.getItems();
-            FilteredList<Menu> filteredData = new FilteredList<>(dataFacture, e -> true);
+            ObservableList<Bill> dataFacture = table.getItems();
+            FilteredList<Bill> filteredData = new FilteredList<>(dataFacture, e -> true);
             String txtRecherche = tfRecherche.getText().trim();
 
-            filteredData.setPredicate(food -> {
+            filteredData.setPredicate(bill -> {
                 if (txtRecherche.isEmpty()) {
                     refresh();
                     return true;
-                } else if (food.getName().contains(txtRecherche)) {
+                } else if (String.valueOf(bill.getNumber()).contains(txtRecherche)) {
 
                     return true;
-                } else return  (food.getDate().format( DateTimeFormatter.ofPattern("dd-MM-yyyy")).contains(txtRecherche));
+                } else return  (bill.getDate().format( DateTimeFormatter.ofPattern("yyyy/MM/dd")).contains(txtRecherche));
             });
 
-            SortedList<Menu> sortedList = new SortedList<>(filteredData);
+            SortedList<Bill> sortedList = new SortedList<>(filteredData);
             sortedList.comparatorProperty().bind(table.comparatorProperty());
             table.setItems(sortedList);
+            refreshTotal();
 
         }catch (Exception e){
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
@@ -191,9 +240,36 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void ActionRefresh(){
-        tfRecherche.clear();
-        refresh();
+    private void ActionSearchDate(){
+        try {
+            LocalDate dateFrom = dpFrom.getValue();
+            LocalDate dateTo = dpTo.getValue();
+
+            if (dateFrom != null && dateTo != null && (dateFrom.isBefore(dateTo) || dateFrom.isEqual(dateFrom))){
+
+                ArrayList<Bill> bills;
+                if (dateFrom.isEqual(dateTo)){
+                    bills = operation.getAllByDate(dateFrom);
+                }else {
+                    bills = operation.getAllBetweenDate(dateFrom,dateTo);
+                }
+                ObservableList<Bill> billObservableList = FXCollections.observableArrayList();
+                billObservableList.addAll(bills);
+                table.setItems(billObservableList );
+                refreshTotal();
+            }else {
+                Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+                alertWarning.setHeaderText("تحذير");
+                alertWarning.setContentText("من فضلك قم بتحديد التواريخ");
+                alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
+                Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
+                okButton.setText("موافق");
+                alertWarning.showAndWait();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void refresh(){
@@ -203,6 +279,21 @@ public class MainController implements Initializable {
         table.setItems(billObservableList );
 
         lbNumber.setText(String.valueOf(bills.size()));
+        refreshTotal();
+    }
+
+    private void refreshTotal(){
+        try {
+            if (table.getItems().size() != 0) {
+                float total = 0;
+                for (int i = 0; i < table.getItems().size(); i++) {
+                    total += table.getItems().get(i).getTotalPrice();
+                }
+                lbTotal.setText(String.format("%,.2f دج", total));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -213,49 +304,9 @@ public class MainController implements Initializable {
             Bill selectedBill = table.getSelectionModel().getSelectedItem();
 
             if (selectedBill != null) {
-                try {
-
-                    String path = System.getProperty("user.dir")+"/src/main/resources/com/moulay/krepehouse/Jasper/Invoice1.jrxml";
-                    JasperDesign design = JRXmlLoader.load(path);
-
-                    if (operation.getConn().isClosed()) operation.connectDatabase();
-
-                    String sql = "SELECT\n" +
-                            "    b.NUMBER AS Number,\n" +
-                            "    b.DATE AS Date,\n" +
-                            "    f.name_ar AS NameAr,\n" +
-                            "    fb.QTE AS Qte,\n" +
-                            "    f.PRICE AS Price,\n" +
-                            "    fb.TOTAL_PRICE AS FoodTotal,\n" +
-                            "    b.TOTAL_PRICE AS BillTotal\n" +
-                            "FROM bill AS b\n" +
-                            "INNER JOIN food_bill AS fb \n" +
-                            "    ON b.UniqueID = fb.UniqueID_BILL\n" +
-                            "INNER JOIN food AS f \n" +
-                            "    ON fb.UniqueID_FOOD = f.UniqueID\n" +
-                            "WHERE b.UniqueID = "+selectedBill.getUniqueId() ;
-
-                    JRDesignQuery designQuery = new JRDesignQuery();
-                    designQuery.setText(sql);
-                    design.setQuery(designQuery);
-
-                    JasperReport jasperReport = JasperCompileManager.compileReport(design);
-                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, operation.getConn());
-
-                    JasperViewer.viewReport(jasperPrint,false);
-
-                    if (!operation.getConn().isClosed()) operation.closeDatabase();
-
-                    // 5. Direct Print
-//                    PrinterJob printerJob = PrinterJob.getPrinterJob();
-//                    JasperPrintManager.printReport(jasperPrint, false);
-                    /*if (printerJob.printDialog()) {
-
-                    }*/
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                PrintController printController = new PrintController();
+                printController.printPrepare(selectedBill.getUniqueId());
+                printController.viewPrint();
             } else {
                 Alert alertWarning = new Alert(Alert.AlertType.WARNING);
                 alertWarning.setHeaderText("تحذير");

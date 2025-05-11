@@ -8,18 +8,18 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -27,6 +27,8 @@ public class AddController implements Initializable {
 
     @FXML
     private TextField tfName,tfPhone,tfUser,tfPass,tfPassConfirm;
+    @FXML
+    private DatePicker dpDate;
     @FXML
     Label lbAlert;
     @FXML
@@ -38,6 +40,21 @@ public class AddController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // Set the date format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        dpDate.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(LocalDate date) {
+                return date != null ? formatter.format(date) : "";
+            }
+            @Override
+            public LocalDate fromString(String string) {
+                return string != null && !string.isEmpty()
+                        ? LocalDate.parse(string, formatter)
+                        : null;
+            }
+        });
+        dpDate.setValue(LocalDate.now());
 
     }
 
@@ -49,14 +66,15 @@ public class AddController implements Initializable {
         String user = tfUser.getText().trim();
         String pass = tfPass.getText().trim();
         String passConfirm = tfPassConfirm.getText().trim();
+        LocalDate date = dpDate.getValue();
 
 
 
-        if ( !name.isEmpty() && !user.isEmpty() && !pass.isEmpty() && !passConfirm.isEmpty()){
+        if ( !name.isEmpty() && !user.isEmpty() && !pass.isEmpty() && !passConfirm.isEmpty() ){
 
             if (passConfirm.equals(pass)) {
 
-                Vendor vendor = new  Vendor(name,phone,user,pass);
+                Vendor vendor = new  Vendor(name,phone,date,user,pass);
 
                 boolean ins = insert(vendor);
 
@@ -85,12 +103,13 @@ public class AddController implements Initializable {
         String user = tfUser.getText().trim();
         String pass = tfPass.getText().trim();
         String passConfirm = tfPassConfirm.getText().trim();
+        LocalDate date = dpDate.getValue();
 
         if ( !name.isEmpty() && !user.isEmpty() && !pass.isEmpty() && !passConfirm.isEmpty()){
 
             if (passConfirm.equals(pass)) {
 
-                Vendor vendor = new Vendor(name, phone, user, pass);
+                Vendor vendor = new Vendor(name, phone, date, user, pass);
 
                 boolean ins = insert(vendor);
 

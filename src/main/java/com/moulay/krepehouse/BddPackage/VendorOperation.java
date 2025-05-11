@@ -1,6 +1,5 @@
 package com.moulay.krepehouse.BddPackage;
 
-import com.moulay.krepehouse.Models.Food;
 import com.moulay.krepehouse.Models.Vendor;
 
 import java.sql.*;
@@ -114,7 +113,7 @@ public class VendorOperation extends BDD<Vendor>{
                 vendor.setUniqueId(resultSet.getInt("UniqueID"));
                 vendor.setName(resultSet.getString("NAME"));
                 vendor.setPhone(resultSet.getString("PHONE"));
-//                vendor.setDateJoined(resultSet.getDate("DATE_JOINED").toLocalDate());
+                vendor.setDateJoined(resultSet.getDate("DATE_JOINED").toLocalDate());
                 vendor.setUsername(resultSet.getString("USERNAME"));
                 vendor.setPassword(resultSet.getString("PASSWORD"));
                 vendor.setCreateAt(resultSet.getTimestamp("CREATE_AT").toLocalDateTime());

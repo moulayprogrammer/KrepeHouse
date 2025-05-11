@@ -57,8 +57,19 @@ public class MainController implements Initializable {
         clId.setCellValueFactory(new PropertyValueFactory<>("uniqueId"));
         clName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        clSelect.setCellValueFactory(new PropertyValueFactory<>("select"));
+        clDate.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+                }
+            }
+        });
 
+        clSelect.setCellValueFactory(new PropertyValueFactory<>("select"));
         // Or using custom cell factory (uncomment if you need more control)
         clSelect.setCellFactory(col -> new TableCell<Menu, Boolean>() {
             private final CheckBox checkBox = new CheckBox();
@@ -181,8 +192,21 @@ public class MainController implements Initializable {
 
             if (selectedMenu != null) {
                 try {
-                    operation.delete(selectedMenu);
-                    refresh();
+                    Alert alertWarning = new Alert(Alert.AlertType.CONFIRMATION);
+                    alertWarning.setHeaderText("الحذف");
+                    alertWarning.setContentText("هل انت متاكد من الحذف النهائي");
+                    alertWarning.initOwner(this.tfRecherche.getScene().getWindow());
+                    Button okButton = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.OK);
+                    okButton.setText("موافق");
+                    okButton.setOnAction(actionEvent1 -> {
+                        operation.delete(selectedMenu);
+                        refresh();
+                    });
+                    Button Button = (Button) alertWarning.getDialogPane().lookupButton(ButtonType.CANCEL);
+                    Button.setText("إلغاء");
+                    Button.setOnAction(actionEvent1 -> alertWarning.close());
+                    alertWarning.showAndWait();
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
